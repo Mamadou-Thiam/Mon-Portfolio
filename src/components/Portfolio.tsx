@@ -1,83 +1,136 @@
-import { ExternalLink, Code, Server, FileText, Home, Network, HardDrive } from 'lucide-react';
+import { ExternalLink, Github, Code, Server, FileText, Home, Network, HardDrive } from 'lucide-react';
 
 interface Project {
   title: string;
+  description: string;
   url: string;
+  github?: string;
   icon: React.ReactNode;
+  tags: string[];
 }
 
 const projects: Project[] = [
   {
-    title: "Réalisation d'un BackOffice pour la Sonatel",
+    title: "BackOffice Sonatel",
+    description: "Système de gestion des dons pour la Sonatel avec tableau de bord administratif",
     url: "https://github.com/Mamadou-Thiam/Gestion-des-dons-sonatel-.git",
-    icon: <Code className="w-16 h-16" />
+    github: "https://github.com/Mamadou-Thiam/Gestion-des-dons-sonatel-.git",
+    icon: <Code className="w-8 h-8" />,
+    tags: ["React", "Node.js", "MongoDB"]
   },
   {
-    title: "API REST avec MongoDB",
+    title: "API REST MongoDB",
+    description: "Architecture complète d'API RESTful avec documentation et tests",
     url: "https://github.com/Mamadou-Thiam/Backend-MongoDB.git",
-    icon: <Server className="w-16 h-16" />
+    github: "https://github.com/Mamadou-Thiam/Backend-MongoDB.git",
+    icon: <Server className="w-8 h-8" />,
+    tags: ["Node.js", "Express", "MongoDB"]
   },
   {
-    title: "Plateforme de E-Candidature",
+    title: "Plateforme E-Candidature",
+    description: "Solution complète pour la gestion des candidatures en ligne",
     url: "https://github.com/Mamadou-Thiam/labPhaseProject-GMC-.git",
-    icon: <FileText className="w-16 h-16" />
+    github: "https://github.com/Mamadou-Thiam/labPhaseProject-GMC-.git",
+    icon: <FileText className="w-8 h-8" />,
+    tags: ["React", "PostgreSQL", "Supabase"]
   },
   {
-    title: "Projet SUNU DOM pour la gestion d'une pouponnière",
+    title: "SUNU DOM - Gestion Pouponnière",
+    description: "Application de gestion pour structures d'accueil de mineurs",
     url: "https://sysaccueilmineur-frontend.onrender.com",
-    icon: <Home className="w-16 h-16" />
+    github: "https://github.com/Mamadou-Thiam/SUNU-DOM",
+    icon: <Home className="w-8 h-8" />,
+    tags: ["React", "Node.js", "MySQL"]
   },
   {
-    title: "Mise en place d'un Serveur Proxmox en Cluster Ceph pour la HA, Backup et Automatisation avec Terraform",
+    title: "Cluster Proxmox Ceph",
+    description: "Haute disponibilité avec automatisation Terraform",
     url: "#",
-    icon: <Network className="w-16 h-16" />
+    icon: <Network className="w-8 h-8" />,
+    tags: ["Proxmox", "Ceph", "Terraform"]
   },
   {
-    title: "Mise en place d'un serveur FreeNAS",
+    title: "Serveur FreeNAS",
+    description: "Solution de stockage réseau avec redondance",
     url: "#",
-    icon: <HardDrive className="w-16 h-16" />
+    icon: <HardDrive className="w-8 h-8" />,
+    tags: ["FreeNAS", "ZFS", "RAID"]
   }
 ];
 
 function Portfolio() {
   return (
-    <section className="py-20 px-4 bg-white" id="portfolio">
+    <section className="py-32 px-4 bg-[#0f0f14]" id="portfolio">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-blue-600 font-semibold text-sm uppercase tracking-wide mb-2">
-            Ce que j'ai réalisé ?
+        <div className="text-center mb-20">
+          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">
+            Réalisations
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6">
             Portfolio
           </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Découvrez mes projets récents et solutions innovantes
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <a
+            <div
               key={index}
-              href={project.url}
-              target={project.url !== "#" ? "_blank" : undefined}
-              rel={project.url !== "#" ? "noopener noreferrer" : undefined}
-              className="group relative bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-200 hover:border-blue-400 overflow-hidden"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.07] transition-all duration-500"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative z-10">
-                <div className="text-blue-600 group-hover:text-white transition-colors duration-300 mb-6">
-                  {project.icon}
+              <div className="p-8">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl text-white">
+                    {project.icon}
+                  </div>
+                  <div className="flex gap-2">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+                      >
+                        <Github className="w-5 h-5 text-gray-400" />
+                      </a>
+                    )}
+                    {project.url !== "#" && (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+                      >
+                        <ExternalLink className="w-5 h-5 text-gray-400" />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-white transition-colors duration-300 mb-4 min-h-[4rem]">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {project.title}
                 </h3>
 
-                <div className="flex items-center gap-2 text-blue-600 group-hover:text-blue-200 transition-colors duration-300">
-                  <span className="text-sm font-medium">Voir le projet</span>
-                  <ExternalLink size={16} />
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </a>
+
+              <div className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            </div>
           ))}
         </div>
       </div>

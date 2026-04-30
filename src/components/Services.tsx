@@ -1,74 +1,93 @@
-import { Code, Server, Zap, Cloud, HardDrive, BarChart3 } from 'lucide-react';
+import { Code2, Server, Zap, Cloud, HardDrive, BarChart3, ArrowRight } from 'lucide-react';
 
 interface Service {
   title: string;
   description: string;
   icon: React.ReactNode;
+  gradient: string;
 }
 
 const services: Service[] = [
   {
-    title: "Conception et développement Frontend",
-    description: "Création de superbes interfaces utilisateur interactives et réactives en utilisant des technologies modernes telles que React.js. Du design initial à l'implémentation finale, je m'assure que l'expérience utilisateur est au centre de chaque projet.",
-    icon: <Code className="w-12 h-12" />
+    title: "Frontend Development",
+    description: "Interfaces modernes et réactives avec React.js, Next.js. Focus sur l'UX et les performances.",
+    icon: <Code2 className="w-8 h-8" />,
+    gradient: "from-blue-500 to-cyan-500"
   },
   {
-    title: "Développement Backend robuste",
-    description: "Création de serveurs backend robustes et évolutifs en utilisant Node.js et Express.js. Je développe des API RESTful efficaces pour alimenter vos applications, en assurant une gestion optimale des données et des performances.",
-    icon: <Server className="w-12 h-12" />
+    title: "Backend Development",
+    description: "APIs RESTful robustes avec Node.js, Express.js. Architecture scalable et sécurisée.",
+    icon: <Server className="w-8 h-8" />,
+    gradient: "from-green-500 to-emerald-500"
   },
   {
-    title: "Création d'API REST complètes",
-    description: "Développement complet d'API RESTful, de la conception à la documentation, en passant par l'implémentation et les tests. Je veille à ce que vos API fournissent des fonctionnalités complètes et sécurisées, répondant aux normes de l'industrie.",
-    icon: <Zap className="w-12 h-12" />
+    title: "API REST",
+    description: "Conception, développement et documentation d'APIs complètes selon les standards de l'industrie.",
+    icon: <Zap className="w-8 h-8" />,
+    gradient: "from-yellow-500 to-orange-500"
   },
   {
     title: "Cloud & DevOps",
-    description: "DevOps Engineer spécialisé dans l'automatisation et l'optimisation des infrastructures cloud. Expérience dans les pipelines CI/CD, Docker, Kubernetes, Terraform et services AWS pour des architectures scalables et sécurisées.",
-    icon: <Cloud className="w-12 h-12" />
+    description: "CI/CD, Docker, Kubernetes, Terraform, AWS. Infrastructure as Code et automatisation.",
+    icon: <Cloud className="w-8 h-8" />,
+    gradient: "from-purple-500 to-pink-500"
   },
   {
-    title: "Administration Système & Virtualisation",
-    description: "Administrateur Système spécialisé en virtualisation et gestion d'infrastructures. Expérience avec Proxmox VE, sauvegardes et supervision avec Zabbix/Prometheus. Maîtrise des systèmes Linux/Windows pour garantir stabilité et haute disponibilité.",
-    icon: <HardDrive className="w-12 h-12" />
+    title: "System Administration",
+    description: "Virtualisation Proxmox, monitoring Zabbix/Prometheus. Linux/Windows, haute disponibilité.",
+    icon: <HardDrive className="w-8 h-8" />,
+    gradient: "from-gray-700 to-gray-900"
   },
   {
-    title: "Analyste junior en données",
-    description: "Maîtrisant Power BI et SQL Server pour l'analyse, la préparation et la visualisation des données. Capable de concevoir des dashboards pertinents et de transformer des données brutes en indicateurs exploitables.",
-    icon: <BarChart3 className="w-12 h-12" />
+    title: "Data Analysis",
+    description: "Power BI, SQL Server. Dashboards interactifs et indicateurs de performance.",
+    icon: <BarChart3 className="w-8 h-8" />,
+    gradient: "from-indigo-500 to-blue-500"
   }
 ];
 
 function Services() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white" id="services">
+    <section className="py-32 px-4 bg-[#0a0a0f]" id="services">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-blue-600 font-semibold text-sm uppercase tracking-wide mb-2">
-            Ce que je fais ?
+        <div className="text-center mb-20">
+          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">
+            Expertise
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6">
             Services
           </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            Des solutions complètes pour transformer vos idées en réalité digitale
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-8 border border-slate-100 hover:border-blue-400 group"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/[0.07] transition-all duration-500 overflow-hidden"
             >
-              <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-300 mb-4">
-                {service.icon}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+              <div className="relative z-10">
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${service.gradient} mb-6`}>
+                  {service.icon}
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-4">
+                  {service.title}
+                </h3>
+
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  {service.description}
+                </p>
+
+                <div className="flex items-center gap-2 text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-sm font-medium">En savoir plus</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
               </div>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                {service.title}
-              </h3>
-
-              <p className="text-gray-600 leading-relaxed text-sm">
-                {service.description}
-              </p>
             </div>
           ))}
         </div>
