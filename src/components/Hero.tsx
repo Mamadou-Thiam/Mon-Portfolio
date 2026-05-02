@@ -81,7 +81,7 @@ function Hero() {
                 </svg>
                 <div>
                   <p className="text-sm font-semibold text-white">MERN Stack</p>
-                  <p className="text-xs text-gray-400">Expert</p>
+                  {/* <p className="text-xs text-gray-400">Expert</p> */}
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ function Hero() {
                 </svg>
                 <div>
                   <p className="text-sm font-semibold text-white">Cloud & DevOps</p>
-                  <p className="text-xs text-gray-400">AWS Certified</p>
+                  {/* <p className="text-xs text-gray-400">AWS Certified</p> */}
                 </div>
               </div>
             </div>

@@ -27,9 +27,9 @@ const projects: Project[] = [
     tags: ["Node.js", "Express", "MongoDB"]
   },
   {
-    title: "Plateforme E-Candidature",
+    title: "JobSen",
     description: "Solution complète pour la gestion des candidatures en ligne",
-    url: "https://github.com/Mamadou-Thiam/labPhaseProject-GMC-.git",
+    url: "https://jobsen-client.onrender.com/",
     github: "https://github.com/Mamadou-Thiam/labPhaseProject-GMC-.git",
     icon: <FileText className="w-8 h-8" />,
     tags: ["React", "PostgreSQL", "Supabase"]
