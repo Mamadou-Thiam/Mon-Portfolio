@@ -1,4 +1,4 @@
-import { ExternalLink, Briefcase, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles } from 'lucide-react';
+import { ExternalLink, Briefcase, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -65,6 +65,17 @@ const projects: Project[] = [
     light: '#eef2ff',
     color: '#6366f1',
     colorBg: 'rgba(99,102,241,0.1)'
+  },
+  {
+    title: 'SEN TECH',
+    description: "Plateforme éducative innovante pour l'apprentissage en ligne. Accédez à des cours interactifs et suivez votre progression.",
+    icon: <GraduationCap className="w-8 h-8" />,
+    tags: ['React.js', 'Node.js', 'MongoDB', 'Education'],
+    url: 'https://sen-tech-frontend.onrender.com/',
+    accent: 'from-amber-500 to-yellow-600',
+    light: '#fffbeb',
+    color: '#f59e0b',
+    colorBg: 'rgba(245,158,11,0.1)'
   },
   {
     title: 'Projet SUNU DOM',

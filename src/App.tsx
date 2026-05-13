@@ -1,6 +1,7 @@
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import Certifications from './components/Certifications';
 import Skills from './components/Skills';
 import ProfessionalExperience from './components/ProfessionalExperience';
 import Education from './components/Education';
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Services />
       <Portfolio />
+      <Certifications />
       <Skills />
       <ProfessionalExperience />
       <Education />
