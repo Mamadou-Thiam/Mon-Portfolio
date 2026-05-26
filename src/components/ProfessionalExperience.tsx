@@ -42,8 +42,14 @@ const experiences: Experience[] = [
     period: "01/2024 – Present",
     location: "Dakar, Sénégal",
     tasks: [
-      "Application de gestion de données d'une pouponnière (SUNU DOM)",
-      "Application de gestion des candidatures"
+      "ABN Immobilier & Investissement - Plateforme immobilière premium au Sénégal",
+      "SenPrix - Plateforme de comparaison de prix au Sénégal",
+      "API REST avec MongoDB - Création d'API RESTful robustes et sécurisées",
+      "Portfolio Mame Penda - Portfolio personnel moderne pour une designer",
+      "Jobsen - Plateforme de recherche d'emploi connectant candidats et recruteurs",
+      "SEN TECH - Plateforme éducative innovante pour l'apprentissage en ligne",
+      "Projet SUNU DOM - Application de gestion de données d'une pouponnière",
+      "Njek - Logiciel de gestion de stock complet"
     ]
   },
   {

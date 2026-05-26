@@ -1,4 +1,4 @@
-import { ExternalLink, Briefcase, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap } from 'lucide-react';
+import { ExternalLink, Briefcase, Building2, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -33,6 +33,17 @@ const projects: Project[] = [
     light: '#ecfdf5',
     color: '#10b981',
     colorBg: 'rgba(16,185,129,0.1)'
+  },
+  {
+    title: 'ABN Immobilier & Investissement',
+    description: "Plateforme immobilière premium au Sénégal. Présentation des biens, services d'investissement et accompagnement personnalisé pour l'achat et la location de propriétés.",
+    icon: <Building2 className="w-8 h-8" />,
+    tags: ['React.js', 'Node.js', 'MongoDB', 'Immobilier'],
+    url: 'https://abn-immobilier-frontend.onrender.com/',
+    accent: 'from-blue-600 to-sky-500',
+    light: '#f0f9ff',
+    color: '#0284c7',
+    colorBg: 'rgba(2,132,199,0.1)'
   },
   {
     title: 'API REST avec MongoDB',
