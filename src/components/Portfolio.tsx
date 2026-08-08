@@ -1,4 +1,4 @@
-import { ExternalLink, Briefcase, Building2, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap } from 'lucide-react';
+import { ExternalLink, Briefcase, Building2, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap, Plane } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -13,6 +13,17 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: 'Ndiouroul Voyage',
+    description: "Site web d'une agence de voyages et de tourisme présentant les offres de voyages, séjours et circuits, avec réservation en ligne.",
+    icon: <Plane className="w-8 h-8" />,
+    tags: ['React.js', 'Tourisme', 'Voyages', 'Web'],
+    url: 'https://www.ndiouroulvoyage.com/',
+    accent: 'from-sky-500 to-blue-600',
+    light: '#f0f9ff',
+    color: '#0ea5e9',
+    colorBg: 'rgba(14,165,233,0.1)'
+  },
   {
     title: 'BackOffice pour la Sonatel',
     description: "Développement du back-office de la plateforme Wesalo avec la stack MERN. Interfaces dynamiques avec React.js et Redux, API REST sécurisées avec Express.js et MongoDB.",
