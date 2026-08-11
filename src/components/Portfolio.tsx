@@ -1,4 +1,4 @@
-import { ExternalLink, Briefcase, Building2, ShoppingCart, Server, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap, Plane } from 'lucide-react';
+import { ExternalLink, Building2, ShoppingCart, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap, Plane } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -25,21 +25,11 @@ const projects: Project[] = [
     colorBg: 'rgba(14,165,233,0.1)'
   },
   {
-    title: 'BackOffice pour la Sonatel',
-    description: "Développement du back-office de la plateforme Wesalo avec la stack MERN. Interfaces dynamiques avec React.js et Redux, API REST sécurisées avec Express.js et MongoDB.",
-    icon: <Briefcase className="w-8 h-8" />,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Redux', 'AWS S3'],
-    accent: 'from-blue-500 to-indigo-600',
-    light: '#eff6ff',
-    color: '#3b82f6',
-    colorBg: 'rgba(59,130,246,0.1)'
-  },
-  {
     title: 'SenPrix',
     description: "Plateforme de comparaison de prix au Sénégal. Trouvez les meilleures offres et économisez sur vos achats en ligne.",
     icon: <ShoppingCart className="w-8 h-8" />,
     tags: ['React.js', 'Node.js', 'MongoDB', 'Docker'],
-    url: 'https://sen-prix-web.onrender.com/login',
+    url: 'https://senprix-web.onrender.com',
     accent: 'from-emerald-500 to-teal-600',
     light: '#ecfdf5',
     color: '#10b981',
@@ -55,16 +45,6 @@ const projects: Project[] = [
     light: '#f0f9ff',
     color: '#0284c7',
     colorBg: 'rgba(2,132,199,0.1)'
-  },
-  {
-    title: 'API REST avec MongoDB',
-    description: "Création d'API RESTful robustes et sécurisées utilisant Express.js et MongoDB pour une gestion efficace des données.",
-    icon: <Server className="w-8 h-8" />,
-    tags: ['Express.js', 'MongoDB', 'JWT', 'REST API'],
-    accent: 'from-purple-500 to-pink-600',
-    light: '#faf5ff',
-    color: '#8b5cf6',
-    colorBg: 'rgba(139,92,246,0.1)'
   },
   {
     title: 'Portfolio Mame Penda',
