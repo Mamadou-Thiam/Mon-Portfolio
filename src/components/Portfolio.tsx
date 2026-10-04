@@ -1,236 +1,178 @@
-import { ExternalLink, Building2, ShoppingCart, Globe, Search, Users, Package, HardDrive, Database, Sparkles, GraduationCap, Plane } from 'lucide-react';
+import { ExternalLink, Github, Sparkles } from 'lucide-react';
+import { projects, type Project } from '../data/portfolio';
+import SectionHeading from './ui/SectionHeading';
+import Reveal from './ui/Reveal';
+import TiltCard from './ui/TiltCard';
 
-interface Project {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  tags: string[];
-  url?: string;
-  accent: string;
-  light: string;
-  color: string;
-  colorBg: string;
+function ProjectVisual({ project, large = false }: { project: Project; large?: boolean }) {
+  const Icon = project.icon;
+  return (
+    <div
+      className="relative overflow-hidden rounded-xl border border-white/10"
+      style={{
+        background: `radial-gradient(120% 120% at 0% 0%, ${project.colorBg}, transparent 60%), #0A0A12`,
+      }}
+    >
+      {/* Browser chrome */}
+      <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+        <span className="ml-3 truncate rounded-md bg-black/30 px-3 py-1 text-[10px] text-slate-500">
+          {project.title.toLowerCase().replace(/\s+/g, '-')}
+        </span>
+      </div>
+
+      <div className={`relative flex items-center justify-center ${large ? 'h-64 sm:h-80' : 'h-44'}`}>
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
+        <div
+          className="relative flex items-center justify-center rounded-2xl border border-white/10 p-5"
+          style={{ background: project.colorBg, boxShadow: `0 0 60px ${project.colorBg}` }}
+        >
+          <Icon className="h-10 w-10" style={{ color: project.color }} />
+        </div>
+        <span
+          className="absolute bottom-3 right-4 font-display text-xs font-semibold uppercase tracking-[0.2em]"
+          style={{ color: project.color }}
+        >
+          {project.tags[0]}
+        </span>
+      </div>
+    </div>
+  );
 }
 
-const projects: Project[] = [
-  {
-    title: 'Ndiouroul Voyage',
-    description: "Site web d'une agence de voyages et de tourisme présentant les offres de voyages, séjours et circuits, avec réservation en ligne.",
-    icon: <Plane className="w-8 h-8" />,
-    tags: ['React.js', 'Tourisme', 'Voyages', 'Web'],
-    url: 'https://www.ndiouroulvoyage.com/',
-    accent: 'from-sky-500 to-blue-600',
-    light: '#f0f9ff',
-    color: '#0ea5e9',
-    colorBg: 'rgba(14,165,233,0.1)'
-  },
-  {
-    title: 'SenPrix',
-    description: "Plateforme de comparaison de prix au Sénégal. Trouvez les meilleures offres et économisez sur vos achats en ligne.",
-    icon: <ShoppingCart className="w-8 h-8" />,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Docker'],
-    url: 'https://senprix-web.onrender.com',
-    accent: 'from-emerald-500 to-teal-600',
-    light: '#ecfdf5',
-    color: '#10b981',
-    colorBg: 'rgba(16,185,129,0.1)'
-  },
-  {
-    title: 'ABN Immobilier & Investissement',
-    description: "Plateforme immobilière premium au Sénégal. Présentation des biens, services d'investissement et accompagnement personnalisé pour l'achat et la location de propriétés.",
-    icon: <Building2 className="w-8 h-8" />,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Immobilier'],
-    url: 'https://abn-immobilier-frontend.onrender.com/',
-    accent: 'from-blue-600 to-sky-500',
-    light: '#f0f9ff',
-    color: '#0284c7',
-    colorBg: 'rgba(2,132,199,0.1)'
-  },
-  {
-    title: 'Portfolio Mame Penda',
-    description: "Portfolio personnel moderne et élégant présentant les compétences et réalisations d'une designer créative.",
-    icon: <Globe className="w-8 h-8" />,
-    tags: ['React.js', 'Tailwind CSS', 'Vite', 'Design'],
-    url: 'https://mame-penda-portfolio.onrender.com',
-    accent: 'from-rose-500 to-pink-600',
-    light: '#fff1f2',
-    color: '#f43f5e',
-    colorBg: 'rgba(244,63,94,0.1)'
-  },
-  {
-    title: 'Jobsen',
-    description: "Plateforme de recherche d'emploi connectant candidats et recruteurs avec des outils de matching intelligents.",
-    icon: <Search className="w-8 h-8" />,
-    tags: ['React.js', 'Node.js', 'MongoDB'],
-    url: 'https://jobsen-client.onrender.com',
-    accent: 'from-indigo-500 to-violet-600',
-    light: '#eef2ff',
-    color: '#6366f1',
-    colorBg: 'rgba(99,102,241,0.1)'
-  },
-  {
-    title: 'SEN TECH',
-    description: "Plateforme éducative innovante pour l'apprentissage en ligne. Accédez à des cours interactifs et suivez votre progression.",
-    icon: <GraduationCap className="w-8 h-8" />,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Education'],
-    url: 'https://sen-tech-frontend.onrender.com/',
-    accent: 'from-amber-500 to-yellow-600',
-    light: '#fffbeb',
-    color: '#f59e0b',
-    colorBg: 'rgba(245,158,11,0.1)'
-  },
-  {
-    title: 'Projet SUNU DOM',
-    description: "Application de gestion de données d'une pouponnière incluant suivi des enfants, gestion administrative et rapports.",
-    icon: <Users className="w-8 h-8" />,
-    tags: ['Node.js', 'React.js', 'MongoDB'],
-    url: 'https://sysaccueilmineur-frontend.onrender.com/',
-    accent: 'from-cyan-500 to-blue-600',
-    light: '#ecfeff',
-    color: '#06b6d4',
-    colorBg: 'rgba(6,182,212,0.1)'
-  },
-  {
-    title: 'Njek',
-    description: "Logiciel de gestion de stock complet pour optimiser les inventaires, suivre les entrées/sorties et gérer les commandes fournisseurs.",
-    icon: <Package className="w-8 h-8" />,
-    tags: ['Python', 'SQLite', 'Gestion de stock', 'Tkinter'],
-    accent: 'from-orange-500 to-red-600',
-    light: '#fff7ed',
-    color: '#f97316',
-    colorBg: 'rgba(249,115,22,0.1)'
-  },
-  {
-    title: 'Serveur Proxmox en Cluster Ceph',
-    description: "Mise en place d'infrastructure haute disponibilité avec Proxmox, Cluster Ceph pour stockage distribué, backup automatisé et orchestration avec Terraform.",
-    icon: <HardDrive className="w-8 h-8" />,
-    tags: ['Proxmox', 'Ceph', 'Terraform', 'HA'],
-    accent: 'from-slate-600 to-slate-900',
-    light: '#f8fafc',
-    color: '#475569',
-    colorBg: 'rgba(71,85,105,0.1)'
-  },
-  {
-    title: 'Serveur FreeNAS',
-    description: "Déploiement et configuration d'une solution de stockage réseau (NAS) pour centralisation et sécurisation des données d'entreprise.",
-    icon: <Database className="w-8 h-8" />,
-    tags: ['FreeNAS', 'Storage', 'Network'],
-    accent: 'from-teal-500 to-cyan-600',
-    light: '#f0fdfa',
-    color: '#14b8a6',
-    colorBg: 'rgba(20,184,166,0.1)'
-  }
-];
+function ProjectTags({ project }: { project: Project }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {project.tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full border px-3 py-1 text-xs font-medium"
+          style={{ borderColor: `${project.color}40`, backgroundColor: project.colorBg, color: project.color }}
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectLinks({ project, full = false }: { project: Project; full?: boolean }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-3 sm:gap-4 ${full ? 'mt-8' : 'mt-6'}`}>
+      {project.url && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-accent-indigo/40 bg-accent-indigo/15 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-accent-indigo/25 hover:shadow-glow"
+        >
+          Live Demo
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      )}
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-slate-300 transition-all hover:border-white/30 hover:text-white"
+        >
+          <Github className="h-3.5 w-3.5" />
+          GitHub
+        </a>
+      )}
+    </div>
+  );
+}
 
 function Portfolio() {
+  const featured = projects.find((project) => project.featured);
+  const others = projects.filter((project) => !project.featured);
+
   return (
-    <section className="py-32 px-4 bg-[#0f0f14] relative overflow-hidden" id="portfolio">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.08)_0%,transparent_70%)] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-transparent via-blue-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+    <section id="portfolio" className="section-shell">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="container relative">
+        <SectionHeading
+          eyebrow="Réalisations"
+          title={
+            <>
+              Mes <span className="text-gradient">projets</span>
+            </>
+          }
+          subtitle="Des solutions concrètes mêlant développement web, cloud et applications métier."
+        />
 
-      <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium mb-6">
-            <Sparkles className="w-4 h-4" />
-            Réalisations
-          </div>
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-            Mes <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Projets</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Des solutions innovantes mêlant développement web, infrastructure cloud et applications métier
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mt-8" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-2xl overflow-hidden hover:bg-white/[0.06] transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
-              style={{
-                boxShadow: `0 0 0 0 ${project.colorBg}`,
-                transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 8px 32px ${project.colorBg}`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 0 0 transparent';
-              }}
-            >
-              <div
-                className="h-1.5 w-full bg-gradient-to-r opacity-80 transition-opacity duration-500 group-hover:opacity-100"
-                style={{ backgroundImage: `linear-gradient(to right, ${project.color}, ${project.color}dd)` }}
-              />
-
-              <div className="p-7 lg:p-8">
-                <div className="flex items-start justify-between mb-5">
-                  <div
-                    className="p-3 rounded-xl text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                    style={{
-                      background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`,
-                      boxShadow: `0 4px 15px ${project.colorBg}`,
-                    }}
-                  >
-                    {project.icon}
-                  </div>
-                  {project.url && (
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                      style={{
-                        backgroundColor: project.colorBg,
-                        color: project.color,
-                      }}
-                    >
-                      Voir le projet
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 rounded-full text-xs font-medium transition-all duration-300"
-                      style={{
-                        backgroundColor: project.colorBg,
-                        color: project.color,
-                      }}
-                    >
-                      {tag}
+        {/* Featured */}
+        {featured && (
+          <Reveal delay={100} className="mt-16">
+            <TiltCard maxTilt={4} className="perspective">
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-2">
+                <div className="grid gap-8 rounded-[1.25rem] bg-base-950/60 p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:p-10">
+                  <div className="order-2 lg:order-1">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-accent-indigo/30 bg-accent-indigo/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-200">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      Featured Project
                     </span>
-                  ))}
+                    <h3 className="mt-5 font-display text-3xl font-bold text-white sm:text-4xl">
+                      {featured.title}
+                    </h3>
+                    <p className="mt-4 max-w-lg leading-relaxed text-slate-300">{featured.description}</p>
+                    <div className="mt-6">
+                      <ProjectTags project={featured} />
+                    </div>
+                    <ProjectLinks project={featured} full />
+                  </div>
+
+                  <div className="order-1 lg:order-2">
+                    <ProjectVisual project={featured} large />
+                  </div>
                 </div>
               </div>
+            </TiltCard>
+          </Reveal>
+        )}
 
-              <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(600px circle at 50% 50%, ${project.colorBg}, transparent 40%)`,
-                }}
-              />
-            </div>
+        {/* Grid */}
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {others.map((project, index) => (
+            <Reveal key={project.title} delay={(index % 3) * 90}>
+              <TiltCard maxTilt={7} className="h-full">
+                <article className="card-premium hover-glow flex h-full flex-col p-5">
+                  <ProjectVisual project={project} />
+                  <div className="flex flex-1 flex-col pt-5">
+                    <h3 className="font-display text-lg font-semibold text-white transition-colors group-hover/tilt:text-indigo-200">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400 line-clamp-3">
+                      {project.description}
+                    </p>
+                    <div className="mt-4">
+                      <ProjectTags project={project} />
+                    </div>
+                    <ProjectLinks project={project} />
+                  </div>
+                </article>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <p className="text-gray-500 text-sm">
-            {projects.length} projets réalisés
+        <Reveal delay={120} className="mt-14 text-center">
+          <p className="text-sm text-slate-500">
+            <span className="font-semibold text-slate-300">{projects.length}</span> projets réalisés
+            — et ce n'est qu'un début.
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

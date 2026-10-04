@@ -1,92 +1,47 @@
-import { Code2, Cloud, Database, Gauge, Shield, Boxes } from 'lucide-react';
-
-interface SkillCategory {
-  title: string;
-  icon: React.ReactNode;
-  skills: string[];
-  color: string;
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    title: "Developpement",
-    icon: <Code2 className="w-8 h-8" />,
-    skills: ["MongoDB", "Express.js", "React.js", "Node.js", "SQL", "Python"],
-    color: "from-blue-500 to-cyan-500"
-  },
-  {
-    title: "Cloud & DevOps",
-    icon: <Cloud className="w-8 h-8" />,
-    skills: ["AWS", "Docker", "Kubernetes", "Jenkins", "Ansible", "Terraform"],
-    color: "from-purple-500 to-pink-500"
-  },
-  {
-    title: "Administration",
-    icon: <Shield className="w-8 h-8" />,
-    skills: ["Linux", "Windows", "Proxmox", "ESXi", "TrueNAS"],
-    color: "from-green-500 to-emerald-500"
-  },
-  {
-    title: "Supervision",
-    icon: <Gauge className="w-8 h-8" />,
-    skills: ["Zabbix", "Nagios", "Monitoring"],
-    color: "from-yellow-500 to-orange-500"
-  },
-  {
-    title: "Donnees",
-    icon: <Database className="w-8 h-8" />,
-    skills: ["Power BI", "Data Analysis", "Visualization"],
-    color: "from-indigo-500 to-blue-500"
-  },
-  {
-    title: "Outils",
-    icon: <Boxes className="w-8 h-8" />,
-    skills: ["GitHub/GitLab", "CRM", "Outils bureautiques"],
-    color: "from-gray-600 to-gray-800"
-  }
-];
+import { skillCategories } from '../data/portfolio';
+import SectionHeading from './ui/SectionHeading';
+import Reveal from './ui/Reveal';
 
 function Skills() {
   return (
-    <section className="py-32 px-4 bg-[#0a0a0f]" id="skills">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-20">
-          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">
-            Expertise technique
-          </p>
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-            Competences
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Un ecosystème complet de technologies maîtrisées
-          </p>
-        </div>
+    <section id="skills" className="section-shell bg-base-900/40">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="container relative">
+        <SectionHeading
+          eyebrow="Stack technique"
+          title={
+            <>
+              Mes <span className="text-gradient">compétences</span>
+            </>
+          }
+          subtitle="Un écosystème complet, du frontend à l'infrastructure cloud, en passant par la data."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category, index) => (
-            <div
-              key={index}
-              className="group rounded-2xl p-6 border border-white/10 hover:border-blue-400/50 transition-all duration-300 bg-white/5 backdrop-blur-sm hover:bg-white/[0.07]"
-            >
-              <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${category.color} mb-6`}>
-                {category.icon}
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-4">
-                {category.title}
-              </h3>
-
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <span
-                    key={skillIndex}
-                    className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 hover:border-blue-400/50 transition-colors"
+            <Reveal key={category.title} delay={(index % 3) * 90}>
+              <article className="card-premium hover-glow group h-full p-6 sm:p-7">
+                <div className="mb-6 flex items-center gap-4">
+                  <div
+                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${category.gradient} text-white shadow-lg transition-transform duration-500 group-hover:scale-110`}
                   >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+                    <category.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-white">{category.title}</h3>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-indigo/50 hover:text-white"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,110 +1,204 @@
-import { Linkedin, Mail, Phone, MapPin, ArrowDown } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { ArrowDown, Code2, Cloud, Download, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
+import { profile, techMarquee } from '../data/portfolio';
+import MagneticButton from './ui/MagneticButton';
+import Reveal from './ui/Reveal';
+import Particles from './effects/Particles';
 
 function Hero() {
+  const layerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layer = layerRef.current;
+    if (!layer) return;
+
+    let raf = 0;
+    const target = { x: 0, y: 0 };
+    const current = { x: 0, y: 0 };
+
+    const onMove = (e: MouseEvent) => {
+      target.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      target.y = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+
+    const loop = () => {
+      current.x += (target.x - current.x) * 0.06;
+      current.y += (target.y - current.y) * 0.06;
+      layer.querySelectorAll<HTMLElement>('[data-depth]').forEach((el) => {
+        const depth = Number(el.dataset.depth ?? 0);
+        el.style.transform = `translate3d(${current.x * depth}px, ${current.y * depth}px, 0)`;
+      });
+      raf = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener('mousemove', onMove);
+    raf = requestAnimationFrame(loop);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-24 pb-16">
+      {/* Backdrop */}
+      <div className="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-70" />
+      <div className="pointer-events-none absolute -left-40 top-10 h-[32rem] w-[32rem] rounded-full bg-accent-indigo/20 blur-[120px] animate-pulse-glow" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-accent-sky/15 blur-[120px] animate-pulse-glow" />
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
+        <Particles />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-6xl px-4 py-20">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="flex-1 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-6">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-sm text-gray-300">Disponible pour des projets</span>
-            </div>
-
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-              <span className="text-white">Mamadou</span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                THIAM
+      <div className="container relative z-10">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+          {/* Left: copy */}
+          <div ref={layerRef} className="text-center lg:text-left">
+            <Reveal>
+              <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300 backdrop-blur-sm lg:mx-0">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                {profile.available ? 'Disponible pour de nouveaux projets' : 'En mission'}
               </span>
-            </h1>
+            </Reveal>
 
-            <p className="text-xl lg:text-2xl text-gray-300 mb-4 font-light">
-              Développeur Full Stack & Cloud Engineer
-            </p>
+            <Reveal delay={100}>
+              <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.2rem]">
+                <span data-depth="8" className="block">
+                  {profile.firstName}
+                </span>
+                <span data-depth="16" className="block text-gradient-animated">
+                  {profile.lastName}
+                </span>
+              </h1>
+            </Reveal>
 
-            <p className="text-gray-400 mb-8 leading-relaxed max-w-2xl text-lg">
-              Je transforme vos idées en solutions digitales robustes. Spécialiste MERN Stack,
-              Cloud AWS et DevOps. De l'architecture à la production, je construis le futur.
-            </p>
+            <Reveal delay={180}>
+              <p className="mt-6 text-lg font-medium text-slate-200 sm:text-xl lg:text-2xl">
+                MERN Stack Developer
+                <span className="mx-2 text-accent-indigo">&</span>
+                <span className="text-accent-sky">Cloud / DevOps Engineer</span>
+              </p>
+            </Reveal>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
-              <a
-                href="mailto:thiammamadou0020@gmail.com"
-                className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-blue-500/25"
-              >
-                <Mail size={20} />
-                <span className="font-medium">Me contacter</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mamadou-thiam-309682255"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-8 py-4 rounded-full transition-all duration-300 backdrop-blur-sm"
-              >
-                <Linkedin size={20} />
-                <span className="font-medium">LinkedIn</span>
-              </a>
-            </div>
+            <Reveal delay={260}>
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-400 lg:mx-0">
+                {profile.tagline}
+              </p>
+            </Reveal>
 
-            <div className="flex flex-wrap gap-6 justify-center lg:justify-start text-gray-400">
-              <div className="flex items-center gap-2 hover:text-white transition-colors">
-                <Phone size={16} />
-                <span>77 468 66 23</span>
+            <Reveal delay={340}>
+              <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
+                <MagneticButton href="#portfolio">
+                  <Sparkles className="h-4 w-4" />
+                  Voir mes projets
+                </MagneticButton>
+                <MagneticButton href="#contact" variant="ghost">
+                  <Mail className="h-4 w-4" />
+                  Me contacter
+                </MagneticButton>
+                <MagneticButton href={profile.cv} variant="ghost" className="group">
+                  <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                  CV
+                </MagneticButton>
               </div>
-              <div className="flex items-center gap-2 hover:text-white transition-colors">
-                <MapPin size={16} />
-                <span>Dakar, Sénégal</span>
+            </Reveal>
+
+            <Reveal delay={420}>
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-400 lg:justify-start">
+                <a href={`mailto:${profile.email}`} className="flex items-center gap-2 transition-colors hover:text-white">
+                  <Mail className="h-4 w-4 text-accent-indigo" />
+                  {profile.email}
+                </a>
+                <a href={profile.phoneHref} className="flex items-center gap-2 transition-colors hover:text-white">
+                  <Phone className="h-4 w-4 text-accent-indigo" />
+                  {profile.phone}
+                </a>
+                <span className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-accent-indigo" />
+                  {profile.location}
+                </span>
               </div>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-2xl opacity-20 animate-pulse" />
-            <div className="relative w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
-              <img
-                src="/assets/momo.jpeg"
-                alt="Mamadou THIAM"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Right: avatar */}
+          <Reveal delay={200} direction="scale" className="relative mx-auto w-full max-w-sm">
+            <div className="relative aspect-square">
+              <div className="absolute inset-0 animate-spin-slow rounded-full bg-[conic-gradient(from_0deg,#6366F1,#4F46E5,#0EA5E9,#6366F1)] opacity-70 blur-[2px]" />
+              <div className="absolute inset-[6px] rounded-full bg-base-950" />
+              <div className="absolute inset-[10px] overflow-hidden rounded-full border border-white/10">
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  loading="eager"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-950/60 via-transparent to-transparent" />
+              </div>
 
-            <div className="absolute -top-6 -right-6 bg-[#0a0a0f] border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
-              <div className="flex items-center gap-3">
-                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-                <div>
-                  <p className="text-sm font-semibold text-white">MERN Stack</p>
-                  {/* <p className="text-xs text-gray-400">Expert</p> */}
+              {/* Floating badges */}
+              <div
+                data-depth="-22"
+                className="absolute -left-4 top-8 flex items-center gap-2.5 rounded-2xl border border-white/10 bg-base-900/80 px-4 py-3 backdrop-blur-xl sm:-left-8"
+              >
+                <Code2 className="h-5 w-5 text-accent-sky" />
+                <div className="text-left">
+                  <p className="text-xs font-semibold text-white">MERN Stack</p>
+                  <p className="text-[10px] text-slate-400">Full-Stack</p>
                 </div>
               </div>
-            </div>
 
-            <div className="absolute -bottom-6 -left-6 bg-[#0a0a0f] border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
-              <div className="flex items-center gap-3">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path d="M3 15a4 4 0 004 4h14a4 4 0 004-4M5 15l-2-2m2 2l-2 2m8-2l2-2m-2 2l2 2" />
-                  <path d="M12 3v18M8 6a4 4 0 014-4h0a4 4 0 010 8h-4" />
-                </svg>
-                <div>
-                  <p className="text-sm font-semibold text-white">Cloud & DevOps</p>
-                  {/* <p className="text-xs text-gray-400">AWS Certified</p> */}
+              <div
+                data-depth="24"
+                className="absolute -right-3 bottom-10 flex items-center gap-2.5 rounded-2xl border border-white/10 bg-base-900/80 px-4 py-3 backdrop-blur-xl sm:-right-8"
+              >
+                <Cloud className="h-5 w-5 text-accent-violet" />
+                <div className="text-left">
+                  <p className="text-xs font-semibold text-white">Cloud & DevOps</p>
+                  <p className="text-[10px] text-slate-400">AWS · K8s</p>
                 </div>
               </div>
+
+              <div
+                data-depth="-14"
+                className="absolute -bottom-3 left-6 rounded-2xl border border-white/10 bg-base-900/80 px-4 py-2.5 backdrop-blur-xl"
+              >
+                <p className="font-display text-sm font-bold text-gradient">10+ projets</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Tech marquee */}
+        <Reveal delay={500} className="mt-16">
+          <div className="mask-fade-x overflow-hidden">
+            <div className="flex w-max animate-marquee gap-3">
+              {[...techMarquee, ...techMarquee].map((tech, index) => (
+                <span
+                  key={`${tech}-${index}`}
+                  className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-slate-400"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ArrowDown className="text-gray-400" />
-        </div>
+        </Reveal>
       </div>
+
+      <button
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-slate-500 transition-colors hover:text-white sm:flex"
+        aria-label="Défiler vers le bas"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+      </button>
     </section>
   );
 }
