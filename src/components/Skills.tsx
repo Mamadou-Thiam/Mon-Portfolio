@@ -23,7 +23,7 @@ function Skills() {
               <article className="card-premium hover-glow group h-full p-6 sm:p-7">
                 <div className="mb-6 flex items-center gap-4">
                   <div
-                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${category.gradient} text-white shadow-lg transition-transform duration-500 group-hover:scale-110`}
+                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${category.gradient} text-[#fff] shadow-lg transition-transform duration-500 group-hover:scale-110`}
                   >
                     <category.icon className="h-6 w-6" />
                   </div>

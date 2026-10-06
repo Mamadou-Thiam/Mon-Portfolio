@@ -10,7 +10,7 @@ function ProjectVisual({ project, large = false }: { project: Project; large?: b
     <div
       className="relative overflow-hidden rounded-xl border border-white/10"
       style={{
-        background: `radial-gradient(120% 120% at 0% 0%, ${project.colorBg}, transparent 60%), #0A0A12`,
+        background: `radial-gradient(120% 120% at 0% 0%, ${project.colorBg}, transparent 60%), rgb(var(--rgb-base-900))`,
       }}
     >
       {/* Browser chrome */}
@@ -18,7 +18,10 @@ function ProjectVisual({ project, large = false }: { project: Project; large?: b
         <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-        <span className="ml-3 truncate rounded-md bg-black/30 px-3 py-1 text-[10px] text-slate-500">
+        <span
+          className="ml-3 truncate rounded-md px-3 py-1 text-[10px] text-slate-500"
+          style={{ background: 'var(--url-pill-bg)' }}
+        >
           {project.title.toLowerCase().replace(/\s+/g, '-')}
         </span>
       </div>
@@ -28,7 +31,7 @@ function ProjectVisual({ project, large = false }: { project: Project; large?: b
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              'linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)',
+              'linear-gradient(to right, rgb(var(--rgb-white) / 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--rgb-white) / 0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -36,10 +39,10 @@ function ProjectVisual({ project, large = false }: { project: Project; large?: b
           className="relative flex items-center justify-center rounded-2xl border border-white/10 p-5"
           style={{ background: project.colorBg, boxShadow: `0 0 60px ${project.colorBg}` }}
         >
-          <Icon className="h-10 w-10" style={{ color: project.color }} />
+          <Icon className="project-accent h-10 w-10" style={{ color: project.color }} />
         </div>
         <span
-          className="absolute bottom-3 right-4 font-display text-xs font-semibold uppercase tracking-[0.2em]"
+          className="project-accent absolute bottom-3 right-4 font-display text-xs font-semibold uppercase tracking-[0.2em]"
           style={{ color: project.color }}
         >
           {project.tags[0]}
@@ -53,11 +56,11 @@ function ProjectTags({ project }: { project: Project }) {
   return (
     <div className="flex flex-wrap gap-2">
       {project.tags.map((tag) => (
-        <span
-          key={tag}
-          className="rounded-full border px-3 py-1 text-xs font-medium"
-          style={{ borderColor: `${project.color}40`, backgroundColor: project.colorBg, color: project.color }}
-        >
+<span
+        key={tag}
+        className="project-accent rounded-full border px-3 py-1 text-xs font-medium"
+        style={{ borderColor: `${project.color}40`, backgroundColor: project.colorBg, color: project.color }}
+      >
           {tag}
         </span>
       ))}

@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Menu, X, Terminal } from 'lucide-react';
-import { navLinks } from '../data/portfolio';
+import { Menu, Moon, Sun, X, Terminal } from 'lucide-react';
+import { navLinks, profile } from '../data/portfolio';
 import { useActiveSection, useScrolled } from '../hooks/useActiveSection';
+import { useTheme } from '../hooks/useTheme';
+import WhatsAppIcon from './WhatsAppIcon';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled(40);
   const ids = useMemo(() => navLinks.map((link) => link.id), []);
   const active = useActiveSection(ids);
+  const { theme, toggleTheme } = useTheme();
 
   const goTo = (id: string) => {
     setOpen(false);
@@ -66,6 +69,38 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
+          <a
+            href={profile.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Discuter sur WhatsApp"
+            title="Discuter sur WhatsApp"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] transition-all hover:bg-[#25D366]/20 hover:shadow-glow"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+          </a>
+
+          <button
+            onClick={toggleTheme}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white transition-all hover:border-accent-indigo/50 hover:text-accent-indigo"
+            aria-label={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            aria-pressed={theme === 'light'}
+            title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
+          >
+            <span className="relative block h-5 w-5">
+              <Sun
+                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ${
+                  theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
+                }`}
+              />
+              <Moon
+                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ${
+                  theme === 'light' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'
+                }`}
+              />
+            </span>
+          </button>
+
           <button
             onClick={() => goTo('contact')}
             className="hidden rounded-full border border-accent-indigo/40 bg-accent-indigo/10 px-5 py-2.5 text-sm font-semibold text-indigo-200 transition-all hover:bg-accent-indigo/20 hover:shadow-glow lg:inline-flex"

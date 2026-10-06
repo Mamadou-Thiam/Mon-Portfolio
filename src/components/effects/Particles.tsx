@@ -46,6 +46,8 @@ function Particles() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      const isLight = document.documentElement.classList.contains('light');
+      const fillPrefix = isLight ? 'rgba(99,102,241,' : 'rgba(148,163,255,';
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
@@ -56,7 +58,7 @@ function Particles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(148,163,255,${p.a})`;
+        ctx.fillStyle = `${fillPrefix}${p.a})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(draw);

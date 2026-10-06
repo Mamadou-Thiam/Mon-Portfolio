@@ -8,19 +8,53 @@ export default {
         display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
+        /*
+         * Couleurs pilotées par variables CSS (définies dans src/index.css).
+         * Les valeurs sont redéfinies sur `html.light` pour basculer le thème.
+         */
         base: {
-          950: '#050509',
-          900: '#0A0A12',
-          850: '#0D0D18',
-          800: '#12121F',
-          700: '#1A1A2B',
+          950: 'rgb(var(--rgb-base-950) / <alpha-value>)',
+          900: 'rgb(var(--rgb-base-900) / <alpha-value>)',
+          850: 'rgb(var(--rgb-base-850) / <alpha-value>)',
+          800: 'rgb(var(--rgb-base-800) / <alpha-value>)',
+          700: 'rgb(var(--rgb-base-700) / <alpha-value>)',
         },
         accent: {
           indigo: '#6366F1',
           violet: '#4F46E5',
           sky: '#0EA5E9',
         },
-        cream: '#EDEDF2',
+        cream: 'rgb(var(--rgb-cream) / <alpha-value>)',
+        white: 'rgb(var(--rgb-white) / <alpha-value>)',
+        slate: {
+          200: 'rgb(var(--rgb-slate-200) / <alpha-value>)',
+          300: 'rgb(var(--rgb-slate-300) / <alpha-value>)',
+          400: 'rgb(var(--rgb-slate-400) / <alpha-value>)',
+          500: 'rgb(var(--rgb-slate-500) / <alpha-value>)',
+          600: 'rgb(var(--rgb-slate-600) / <alpha-value>)',
+        },
+        indigo: {
+          200: 'rgb(var(--rgb-indigo-200) / <alpha-value>)',
+          300: 'rgb(var(--rgb-indigo-300) / <alpha-value>)',
+        },
+        sky: {
+          200: 'rgb(var(--rgb-sky-200) / <alpha-value>)',
+          300: 'rgb(var(--rgb-sky-300) / <alpha-value>)',
+        },
+        emerald: {
+          200: 'rgb(var(--rgb-emerald-200) / <alpha-value>)',
+          300: 'rgb(var(--rgb-emerald-300) / <alpha-value>)',
+        },
+        amber: {
+          200: 'rgb(var(--rgb-amber-200) / <alpha-value>)',
+          300: 'rgb(var(--rgb-amber-300) / <alpha-value>)',
+        },
+        blue: {
+          300: 'rgb(var(--rgb-blue-300) / <alpha-value>)',
+        },
+        fuchsia: {
+          300: 'rgb(var(--rgb-fuchsia-300) / <alpha-value>)',
+        },
       },
       maxWidth: {
         container: '1200px',
@@ -32,7 +66,7 @@ export default {
       },
       backgroundImage: {
         'grid-fade':
-          'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          'linear-gradient(to right, rgb(var(--rgb-white) / 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--rgb-white) / 0.04) 1px, transparent 1px)',
         'brand-gradient':
           'linear-gradient(120deg, #6366F1 0%, #4F46E5 40%, #0EA5E9 100%)',
       },

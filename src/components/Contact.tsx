@@ -3,10 +3,17 @@ import { CheckCircle2, Github, Linkedin, Mail, MapPin, Phone, Send, Sparkles } f
 import { profile } from '../data/portfolio';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const contactCards = [
   { icon: Mail, label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
   { icon: Phone, label: 'Téléphone', value: profile.phone, href: profile.phoneHref },
+  {
+    icon: WhatsAppIcon,
+    label: 'WhatsApp',
+    value: '+221 76 133 32 09',
+    href: profile.whatsappHref,
+  },
   { icon: MapPin, label: 'Localisation', value: profile.location, href: undefined },
 ];
 
@@ -21,10 +28,12 @@ function Contact() {
     const subject = String(data.get('subject') ?? 'Prise de contact');
     const message = String(data.get('message') ?? '');
 
-    const body = `Nom: ${name}\r\nEmail: ${email}\r\n\r\n${message}`;
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    const body = `Bonjour Mamadou,\n\nNom: ${name}\nEmail: ${email}\nSujet: ${subject}\n\n${message}`;
+    window.open(
+      `https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(body)}`,
+      '_blank',
+      'noopener,noreferrer',
+    );
     setSent(true);
   };
 
@@ -93,6 +102,15 @@ function Contact() {
                     className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-300 transition-all hover:-translate-y-0.5 hover:border-accent-indigo/50 hover:text-white"
                   >
                     <Github className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={profile.whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-300 transition-all hover:-translate-y-0.5 hover:border-emerald-500/50 hover:text-emerald-400"
+                  >
+                    <WhatsAppIcon className="h-5 w-5" />
                   </a>
                   <a
                     href={`mailto:${profile.email}`}
@@ -167,7 +185,7 @@ function Contact() {
               {sent && (
                 <p className="mt-5 flex items-center gap-2 text-sm text-emerald-400">
                   <CheckCircle2 className="h-4 w-4" />
-                  Merci ! Votre client mail vient de s'ouvrir pour finaliser l'envoi.
+                  Merci ! WhatsApp s'ouvre avec votre message prêt à être envoyé.
                 </p>
               )}
 

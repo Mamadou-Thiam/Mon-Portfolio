@@ -48,7 +48,7 @@ function TiltCard({ children, className = '', maxTilt = 8, glare = true }: TiltC
           className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100"
           style={{
             background:
-              'radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.10), transparent 45%)',
+              'radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--rgb-white) / 0.1), transparent 45%)',
           }}
         />
       )}

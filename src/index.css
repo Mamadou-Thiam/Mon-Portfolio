@@ -3,8 +3,72 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Palette pilotée par variables CSS.
+   * Les utilitaires Tailwind (text-white, bg-base-950, border-white/10, ...)
+   * sont mappés sur ces variables dans tailwind.config.js, ce qui permet de
+   * basculer tout le thème (dark <-> light) en redéfinissant uniquement les
+   * valeurs ci-dessous sur `html.light`.
+   * En mode clair, `white` devient l'encre sombre et les surfaces deviennent claires.
+   */
   :root {
     color-scheme: dark;
+
+    --rgb-white: 255 255 255;
+    --rgb-cream: 237 237 242;
+    --rgb-base-950: 5 5 9;
+    --rgb-base-900: 10 10 18;
+    --rgb-base-850: 13 13 24;
+    --rgb-base-800: 18 18 31;
+    --rgb-base-700: 26 26 43;
+    --rgb-slate-200: 226 232 240;
+    --rgb-slate-300: 203 213 225;
+    --rgb-slate-400: 148 163 184;
+    --rgb-slate-500: 100 116 139;
+    --rgb-slate-600: 71 85 105;
+    --rgb-indigo-200: 199 210 254;
+    --rgb-indigo-300: 165 180 252;
+    --rgb-sky-200: 186 230 253;
+    --rgb-sky-300: 125 211 252;
+    --rgb-emerald-200: 167 243 208;
+    --rgb-emerald-300: 110 231 183;
+    --rgb-amber-200: 253 230 138;
+    --rgb-amber-300: 252 211 77;
+    --rgb-blue-300: 147 197 253;
+    --rgb-fuchsia-300: 240 171 252;
+
+    --url-pill-bg: rgba(0, 0, 0, 0.35);
+    --theme-color: #050509;
+  }
+
+  html.light {
+    color-scheme: light;
+
+    --rgb-white: 15 23 42;
+    --rgb-cream: 30 41 59;
+    --rgb-base-950: 246 247 250;
+    --rgb-base-900: 255 255 255;
+    --rgb-base-850: 255 255 255;
+    --rgb-base-800: 238 241 246;
+    --rgb-base-700: 224 228 236;
+    --rgb-slate-200: 51 65 85;
+    --rgb-slate-300: 71 85 105;
+    --rgb-slate-400: 100 116 139;
+    --rgb-slate-500: 113 128 150;
+    --rgb-slate-600: 100 116 139;
+    --rgb-indigo-200: 49 46 129;
+    --rgb-indigo-300: 67 56 202;
+    --rgb-sky-200: 3 105 161;
+    --rgb-sky-300: 3 105 161;
+    --rgb-emerald-200: 4 120 87;
+    --rgb-emerald-300: 4 120 87;
+    --rgb-amber-200: 146 64 14;
+    --rgb-amber-300: 146 64 14;
+    --rgb-blue-300: 29 78 216;
+    --rgb-fuchsia-300: 162 28 175;
+
+    --url-pill-bg: rgba(15, 23, 42, 0.07);
+    --theme-color: #f6f7fa;
   }
 
   html {
@@ -24,18 +88,22 @@
     background: rgba(99, 102, 241, 0.35);
     color: #fff;
   }
+  html.light ::selection {
+    background: rgba(79, 70, 229, 0.85);
+    color: #fff;
+  }
 
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #050509;
+    background: rgb(var(--rgb-base-950));
   }
   ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #6366f1, #0ea5e9);
     border-radius: 999px;
-    border: 2px solid #050509;
+    border: 2px solid rgb(var(--rgb-base-950));
   }
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #4f46e5, #0284c7);
@@ -121,7 +189,8 @@
   }
 
   .btn-primary {
-    @apply btn text-white shadow-glow hover:shadow-[0_0_50px_-8px_rgba(99,102,241,0.75)];
+    @apply btn shadow-glow hover:shadow-[0_0_50px_-8px_rgba(99,102,241,0.75)];
+    color: #fff;
     background-size: 200% 200%;
     background-image: linear-gradient(120deg, #6366f1, #4f46e5, #0ea5e9);
   }
@@ -150,8 +219,8 @@
   .bg-grid {
     background-size: 56px 56px;
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      linear-gradient(to right, rgb(var(--rgb-white) / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--rgb-white) / 0.045) 1px, transparent 1px);
   }
 
   .mask-fade-b {
@@ -198,6 +267,22 @@
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
+}
+
+/* Animation douce lors du changement de thème (ajoutée/retirée par useTheme) */
+html.theme-animating,
+html.theme-animating body,
+html.theme-animating * {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+/* Accents colorés des projets : assombris en mode clair pour rester lisibles */
+html.light .project-accent {
+  filter: brightness(0.68) saturate(1.2);
 }
 
 @media (prefers-reduced-motion: reduce) {

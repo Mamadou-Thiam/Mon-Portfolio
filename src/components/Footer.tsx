@@ -2,11 +2,13 @@ import { ArrowUp, Github, Linkedin, Mail, MapPin, Phone, Terminal } from 'lucide
 import { navLinks, profile } from '../data/portfolio';
 import MagneticButton from './ui/MagneticButton';
 import Reveal from './ui/Reveal';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const socials = [
   { icon: Github, href: profile.github, label: 'GitHub' },
   { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
   { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
+  { icon: WhatsAppIcon, href: profile.whatsappHref, label: 'WhatsApp' },
 ];
 
 const contactLinks = [

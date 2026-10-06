@@ -16,6 +16,7 @@ import {
   Server,
   Shield,
   ShoppingCart,
+  Stethoscope,
   Users,
   Zap,
 } from 'lucide-react';
@@ -46,6 +47,8 @@ export const profile = {
   email: 'thiammamadou0020@gmail.com',
   phone: '77 468 66 23',
   phoneHref: 'tel:+221774686623',
+  whatsapp: '221761333209',
+  whatsappHref: 'https://wa.me/221761333209',
   location: 'Dakar, Sénégal',
   cv: '/cv-mamadou-thiam.pdf',
   linkedin: 'https://www.linkedin.com/in/mamadou-thiam-309682255',
@@ -160,6 +163,16 @@ export const projects: Project[] = [
     color: '#10b981',
     colorBg: 'rgba(16,185,129,0.1)',
     featured: true,
+  },
+  {
+    title: 'CMAS — Cabinet Médical Ahmadina Saliou',
+    description:
+      "Site vitrine du Cabinet Médical Ahmadina Saliou : présentation du cabinet et de ses praticiens, liste des consultations et services de santé, prise de rendez-vous et prise de contact en ligne.",
+    icon: Stethoscope,
+    tags: ['React.js', 'Web Design', 'Santé', 'SEO'],
+    url: 'https://cabinetahmadinasaliou.com',
+    color: '#0d9488',
+    colorBg: 'rgba(13,148,136,0.1)',
   },
   {
     title: 'Mounir Digital',

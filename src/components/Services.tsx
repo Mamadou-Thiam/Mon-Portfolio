@@ -23,7 +23,7 @@ function Services() {
             <Reveal key={service.title} delay={index * 80}>
               <article className="card-premium hover-glow group relative h-full p-7">
                 <div
-                  className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
+                  className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.gradient} text-[#fff] shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
                 >
                   <service.icon className="h-6 w-6" />
                 </div>

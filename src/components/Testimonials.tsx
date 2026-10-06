@@ -34,7 +34,7 @@ function Testimonials() {
                 </blockquote>
 
                 <figcaption className="mt-7 flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-gradient font-display font-bold text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-gradient font-display font-bold text-[#fff]">
                     {testimonial.clientName.replace(/[^A-Za-zÀ-ÿ]/g, '').charAt(0)}
                   </div>
                   <div>
