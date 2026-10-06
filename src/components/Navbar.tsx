@@ -14,6 +14,10 @@ function Navbar() {
 
   const goTo = (id: string) => {
     setOpen(false);
+    if (id === 'blog') {
+      window.location.hash = '/blog';
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -101,12 +105,7 @@ function Navbar() {
             </span>
           </button>
 
-          <button
-            onClick={() => goTo('contact')}
-            className="hidden rounded-full border border-accent-indigo/40 bg-accent-indigo/10 px-5 py-2.5 text-sm font-semibold text-indigo-200 transition-all hover:bg-accent-indigo/20 hover:shadow-glow lg:inline-flex"
-          >
-            Discutons
-          </button>
+
 
           <button
             onClick={() => setOpen((v) => !v)}
