@@ -1,8 +1,10 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   Award,
+  BarChart3,
   Boxes,
   Building2,
+  Cable,
   Cloud,
   Code2,
   Database,
@@ -10,8 +12,11 @@ import {
   Globe,
   GraduationCap,
   HardDrive,
+  Laptop,
+  Network,
   Package,
   Plane,
+  Presentation,
   Search,
   Server,
   Shield,
@@ -33,6 +38,7 @@ export const navLinks: NavLink[] = [
   { id: 'portfolio', label: 'Projets' },
   { id: 'skills', label: 'Compétences' },
   { id: 'experience', label: 'Expérience' },
+  { id: 'blog', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -50,12 +56,34 @@ export const profile = {
   whatsapp: '221761333209',
   whatsappHref: 'https://wa.me/221761333209',
   location: 'Dakar, Sénégal',
-  cv: '/cv-mamadou-thiam.pdf',
+  cv: '/Mamadou_THIAM_CV_DEV.pdf',
   linkedin: 'https://www.linkedin.com/in/mamadou-thiam-309682255',
   github: 'https://github.com/Mamadou-Thiam',
   avatar: '/assets/momo.jpeg',
   available: true,
 };
+
+export interface CvFile {
+  label: string;
+  hint: string;
+  file: string;
+  download: string;
+}
+
+export const cvFiles: CvFile[] = [
+  {
+    label: 'CV Développeur',
+    hint: 'MERN Stack',
+    file: '/Mamadou_THIAM_CV_DEV.pdf',
+    download: 'Mamadou_THIAM_CV_DEV.pdf',
+  },
+  {
+    label: 'CV DevOps',
+    hint: 'Cloud & DevOps',
+    file: '/Mamadou_THIAM_CV_DEVOPS.pdf',
+    download: 'Mamadou_THIAM_CV_DEVOPS.pdf',
+  },
+];
 
 export interface Stat {
   value: number;
@@ -148,7 +176,6 @@ export interface Project {
   github?: string;
   color: string;
   colorBg: string;
-  featured?: boolean;
 }
 
 export const projects: Project[] = [
@@ -162,7 +189,6 @@ export const projects: Project[] = [
     github: 'https://github.com/Mamadou-Thiam',
     color: '#10b981',
     colorBg: 'rgba(16,185,129,0.1)',
-    featured: true,
   },
   {
     title: 'CMAS — Cabinet Médical Ahmadina Saliou',
@@ -449,7 +475,7 @@ export const education: EducationItem[] = [
 export interface Certification {
   title: string;
   issuer: string;
-  icon: string;
+  icon: LucideIcon;
   badge: string;
 }
 
@@ -457,32 +483,32 @@ export const certifications: Certification[] = [
   {
     title: 'CCNA : Introduction aux réseaux',
     issuer: 'Cisco Networking Academy',
-    icon: '🌐',
-    badge: 'bg-sky-500/20 text-sky-300',
+    icon: Network,
+    badge: 'bg-sky-500/40 text-white border border-sky-500/60',
   },
   {
     title: 'CCNA : Commutation, routage et bases du sans-fil',
     issuer: 'Cisco Networking Academy',
-    icon: '🔌',
-    badge: 'bg-blue-500/20 text-blue-300',
+    icon: Cable,
+    badge: 'bg-blue-500/40 text-white border border-blue-500/60',
   },
   {
     title: 'Certificat de formation — Intégration des instructeurs',
     issuer: 'Gomycode',
-    icon: '👨‍🏫',
-    badge: 'bg-amber-500/20 text-amber-300',
+    icon: Presentation,
+    badge: 'bg-amber-500/40 text-white border border-amber-500/60',
   },
   {
     title: 'Certificat de réussite — Bootcamp Full-Stack JavaScript',
     issuer: 'Gomycode',
-    icon: '💻',
-    badge: 'bg-fuchsia-500/20 text-fuchsia-300',
+    icon: Laptop,
+    badge: 'bg-fuchsia-500/40 text-white border border-fuchsia-500/60',
   },
   {
     title: 'Certificat de réussite — Analyse de données (Power BI)',
     issuer: 'Microsoft / Gomycode',
-    icon: '📊',
-    badge: 'bg-emerald-500/20 text-emerald-300',
+    icon: BarChart3,
+    badge: 'bg-emerald-500/40 text-white border border-emerald-500/60',
   },
 ];
 

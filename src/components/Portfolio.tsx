@@ -1,10 +1,10 @@
-import { ExternalLink, Github, Sparkles } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { projects, type Project } from '../data/portfolio';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 import TiltCard from './ui/TiltCard';
 
-function ProjectVisual({ project, large = false }: { project: Project; large?: boolean }) {
+function ProjectVisual({ project }: { project: Project }) {
   const Icon = project.icon;
   return (
     <div
@@ -26,7 +26,7 @@ function ProjectVisual({ project, large = false }: { project: Project; large?: b
         </span>
       </div>
 
-      <div className={`relative flex items-center justify-center ${large ? 'h-64 sm:h-80' : 'h-44'}`}>
+      <div className="relative flex items-center justify-center h-44">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -56,11 +56,11 @@ function ProjectTags({ project }: { project: Project }) {
   return (
     <div className="flex flex-wrap gap-2">
       {project.tags.map((tag) => (
-<span
-        key={tag}
-        className="project-accent rounded-full border px-3 py-1 text-xs font-medium"
-        style={{ borderColor: `${project.color}40`, backgroundColor: project.colorBg, color: project.color }}
-      >
+        <span
+          key={tag}
+          className="project-accent rounded-full border px-3 py-1 text-xs font-medium"
+          style={{ borderColor: `${project.color}40`, backgroundColor: project.colorBg, color: project.color }}
+        >
           {tag}
         </span>
       ))}
@@ -68,9 +68,9 @@ function ProjectTags({ project }: { project: Project }) {
   );
 }
 
-function ProjectLinks({ project, full = false }: { project: Project; full?: boolean }) {
+function ProjectLinks({ project }: { project: Project }) {
   return (
-    <div className={`flex flex-wrap items-center gap-3 sm:gap-4 ${full ? 'mt-8' : 'mt-6'}`}>
+    <div className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
       {project.url && (
         <a
           href={project.url}
@@ -98,9 +98,6 @@ function ProjectLinks({ project, full = false }: { project: Project; full?: bool
 }
 
 function Portfolio() {
-  const featured = projects.find((project) => project.featured);
-  const others = projects.filter((project) => !project.featured);
-
   return (
     <section id="portfolio" className="section-shell">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -115,39 +112,9 @@ function Portfolio() {
           subtitle="Des solutions concrètes mêlant développement web, cloud et applications métier."
         />
 
-        {/* Featured */}
-        {featured && (
-          <Reveal delay={100} className="mt-16">
-            <TiltCard maxTilt={4} className="perspective">
-              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-2">
-                <div className="grid gap-8 rounded-[1.25rem] bg-base-950/60 p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:p-10">
-                  <div className="order-2 lg:order-1">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-accent-indigo/30 bg-accent-indigo/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-200">
-                      <Sparkles className="h-3.5 w-3.5" />
-                      Featured Project
-                    </span>
-                    <h3 className="mt-5 font-display text-3xl font-bold text-white sm:text-4xl">
-                      {featured.title}
-                    </h3>
-                    <p className="mt-4 max-w-lg leading-relaxed text-slate-300">{featured.description}</p>
-                    <div className="mt-6">
-                      <ProjectTags project={featured} />
-                    </div>
-                    <ProjectLinks project={featured} full />
-                  </div>
-
-                  <div className="order-1 lg:order-2">
-                    <ProjectVisual project={featured} large />
-                  </div>
-                </div>
-              </div>
-            </TiltCard>
-          </Reveal>
-        )}
-
         {/* Grid */}
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {others.map((project, index) => (
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
             <Reveal key={project.title} delay={(index % 3) * 90}>
               <TiltCard maxTilt={7} className="h-full">
                 <article className="card-premium hover-glow flex h-full flex-col p-5">

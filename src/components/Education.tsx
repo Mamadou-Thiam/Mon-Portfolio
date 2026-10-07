@@ -4,10 +4,10 @@ import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 
 const typeStyles: Record<string, string> = {
-  Master: 'bg-accent-violet/20 text-indigo-200 border-accent-violet/30',
-  Bootcamp: 'bg-accent-sky/20 text-sky-200 border-accent-sky/30',
-  Licence: 'bg-emerald-500/20 text-emerald-200 border-emerald-500/30',
-  Séminaire: 'bg-amber-500/20 text-amber-200 border-amber-500/30',
+  Master: 'bg-accent-violet/40 text-white border-accent-violet/60',
+  Bootcamp: 'bg-accent-sky/40 text-white border-accent-sky/60',
+  Licence: 'bg-emerald-500/40 text-white border-emerald-500/60',
+  Séminaire: 'bg-amber-500/40 text-white border-amber-500/60',
 };
 
 function Education() {

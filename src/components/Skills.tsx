@@ -34,7 +34,7 @@ function Skills() {
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-indigo/50 hover:text-white"
+                      className="rounded-lg border border-white/15 bg-white/[0.08] px-3 py-1.5 text-sm font-medium text-white shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-indigo/60 hover:bg-white/[0.12]"
                     >
                       {skill}
                     </span>

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { ArrowDown, Code2, Cloud, Download, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
+import { ArrowDown, Code2, Cloud, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
 import { profile, techMarquee } from '../data/portfolio';
 import MagneticButton from './ui/MagneticButton';
+import CvDownloadButton from './ui/CvDownloadButton';
 import Reveal from './ui/Reveal';
 import Particles from './effects/Particles';
 
@@ -91,7 +92,7 @@ function Hero() {
               </p>
             </Reveal>
 
-            <Reveal delay={340}>
+            <Reveal delay={340} className="relative z-50">
               <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
                 <MagneticButton href="#portfolio">
                   <Sparkles className="h-4 w-4" />
@@ -101,10 +102,7 @@ function Hero() {
                   <Mail className="h-4 w-4" />
                   Me contacter
                 </MagneticButton>
-                <MagneticButton href={profile.cv} variant="ghost" className="group">
-                  <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                  CV
-                </MagneticButton>
+                <CvDownloadButton />
               </div>
             </Reveal>
 

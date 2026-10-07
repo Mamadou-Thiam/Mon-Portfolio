@@ -18,24 +18,27 @@ function Certifications() {
         />
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {certifications.map((cert, index) => (
-            <Reveal key={cert.title} delay={(index % 3) * 90}>
-              <article className="card-premium hover-glow group flex h-full items-start gap-4 p-6">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-2xl">
-                  {cert.icon}
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
-                    <h3 className="text-sm font-semibold leading-snug text-white">{cert.title}</h3>
+          {certifications.map((cert, index) => {
+            const Icon = cert.icon;
+            return (
+              <Reveal key={cert.title} delay={(index % 3) * 90}>
+                <article className="card-premium hover-glow group flex h-full items-start gap-4 p-6">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-2xl text-accent-indigo">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <span className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-medium ${cert.badge}`}>
-                    {cert.issuer}
-                  </span>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+                  <div className="min-w-0">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+                      <h3 className="text-sm font-semibold leading-snug text-white">{cert.title}</h3>
+                    </div>
+                    <span className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-medium shadow-sm ${cert.badge}`}>
+                      {cert.issuer}
+                    </span>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal delay={120} className="mt-12">
