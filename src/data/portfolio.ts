@@ -20,6 +20,7 @@ import {
   Search,
   Server,
   Shield,
+  Shirt,
   ShoppingCart,
   Stethoscope,
   Users,
@@ -167,6 +168,14 @@ export const services: Service[] = [
   },
 ];
 
+export const projectCategories = [
+  'Sites vitrines',
+  'Applications & outils',
+  'Cloud & infrastructure',
+] as const;
+
+export type ProjectCategory = (typeof projectCategories)[number];
+
 export interface Project {
   title: string;
   description: string;
@@ -176,9 +185,23 @@ export interface Project {
   github?: string;
   color: string;
   colorBg: string;
+  category: ProjectCategory;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
+  {
+    title: 'Jumelles Amar',
+    description:
+      "Site vitrine d'une maison de haute couture à Dakar : créations sur mesure, collections d'exception, savoir-faire artisanal et prise de contact en ligne.",
+    icon: Shirt,
+    tags: ['React.js', 'Web Design', 'Mode', 'SEO'],
+    url: 'https://www.jumellesamar.com',
+    color: '#d4af37',
+    colorBg: 'rgba(212,175,55,0.1)',
+    category: 'Sites vitrines',
+    featured: true,
+  },
   {
     title: 'SenPrix',
     description:
@@ -189,6 +212,7 @@ export const projects: Project[] = [
     github: 'https://github.com/Mamadou-Thiam',
     color: '#10b981',
     colorBg: 'rgba(16,185,129,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'CMAS — Cabinet Médical Ahmadina Saliou',
@@ -199,6 +223,7 @@ export const projects: Project[] = [
     url: 'https://cabinetahmadinasaliou.com',
     color: '#0d9488',
     colorBg: 'rgba(13,148,136,0.1)',
+    category: 'Sites vitrines',
   },
   {
     title: 'Mounir Digital',
@@ -209,6 +234,7 @@ export const projects: Project[] = [
     url: 'https://www.mounir-digital.com/',
     color: '#8b5cf6',
     colorBg: 'rgba(139,92,246,0.1)',
+    category: 'Sites vitrines',
   },
   {
     title: 'ABN Immobilier & Investissement',
@@ -219,6 +245,7 @@ export const projects: Project[] = [
     url: 'https://abn-immobilier-frontend.onrender.com/',
     color: '#0284c7',
     colorBg: 'rgba(2,132,199,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'Jobsen',
@@ -229,6 +256,7 @@ export const projects: Project[] = [
     url: 'https://jobsen-client.onrender.com',
     color: '#6366f1',
     colorBg: 'rgba(99,102,241,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'Ndiouroul Voyage',
@@ -239,6 +267,7 @@ export const projects: Project[] = [
     url: 'https://www.ndiouroulvoyage.com/',
     color: '#0ea5e9',
     colorBg: 'rgba(14,165,233,0.1)',
+    category: 'Sites vitrines',
   },
   {
     title: 'SEN TECH',
@@ -249,6 +278,7 @@ export const projects: Project[] = [
     url: 'https://sen-tech-frontend.onrender.com/',
     color: '#f59e0b',
     colorBg: 'rgba(245,158,11,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'SUNU DOM',
@@ -259,6 +289,7 @@ export const projects: Project[] = [
     url: 'https://sysaccueilmineur-frontend.onrender.com/',
     color: '#06b6d4',
     colorBg: 'rgba(6,182,212,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'Portfolio Mame Penda',
@@ -269,6 +300,7 @@ export const projects: Project[] = [
     url: 'https://mame-penda-portfolio.onrender.com',
     color: '#f43f5e',
     colorBg: 'rgba(244,63,94,0.1)',
+    category: 'Sites vitrines',
   },
   {
     title: 'Njek',
@@ -278,6 +310,7 @@ export const projects: Project[] = [
     tags: ['Python', 'SQLite', 'Gestion de stock', 'Tkinter'],
     color: '#f97316',
     colorBg: 'rgba(249,115,22,0.1)',
+    category: 'Applications & outils',
   },
   {
     title: 'Cluster Proxmox & Ceph',
@@ -287,6 +320,7 @@ export const projects: Project[] = [
     tags: ['Proxmox', 'Ceph', 'Terraform', 'HA'],
     color: '#64748b',
     colorBg: 'rgba(100,116,139,0.12)',
+    category: 'Cloud & infrastructure',
   },
   {
     title: 'Serveur FreeNAS',
@@ -296,6 +330,7 @@ export const projects: Project[] = [
     tags: ['FreeNAS', 'Storage', 'Network'],
     color: '#14b8a6',
     colorBg: 'rgba(20,184,166,0.1)',
+    category: 'Cloud & infrastructure',
   },
 ];
 
