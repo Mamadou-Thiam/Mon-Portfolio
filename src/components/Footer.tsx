@@ -54,7 +54,7 @@ function Footer() {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-accent-indigo">
                 <Terminal className="h-4 w-4" />
               </span>
-              Mamadou<span className="text-gradient">.dev</span>
+              Mamadou <span className="text-gradient">THIAM</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               {profile.role}. De l'idée à la production, je conçois des expériences web et des

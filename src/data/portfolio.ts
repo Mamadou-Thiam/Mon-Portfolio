@@ -569,6 +569,13 @@ export const testimonials: Testimonial[] = [
     clientTitle: 'Fondateur, IND Location',
     rating: 5,
   },
+  {
+    quote:
+      "Le nouveau site reflète exactement l'élégance de Jumelles Amar. Mamadou a su mettre en valeur nos créations avec beaucoup de goût, tout en garantissant une expérience rapide et facile à utiliser. Un vrai professionnalisme du début à la fin.",
+    clientName: 'Astou Mbene',
+    clientTitle: 'PDG, Jumelles Amar',
+    rating: 5,
+  },
 ];
 
 export const awardsIcon = Award;

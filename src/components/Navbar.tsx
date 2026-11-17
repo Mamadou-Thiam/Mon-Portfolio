@@ -44,7 +44,7 @@ function Navbar() {
             <Terminal className="h-4 w-4" />
           </span>
           <span className="hidden sm:inline">
-            Mamadou<span className="text-gradient">.dev</span>
+            Mamadou <span className="text-gradient">THIAM</span>
           </span>
         </button>
 
