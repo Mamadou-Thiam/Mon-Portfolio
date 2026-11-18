@@ -1,0 +1,92 @@
+export const education: EducationItem[] = [
+  {
+    title: 'Master 2 en Systèmes, Réseaux et Cloud',
+    institution: 'Institut Africain de Management (IAM)',
+    period: '2025',
+    location: 'Dakar, Sénégal',
+    type: 'Master',
+  },
+  {
+    title: 'Bootcamp en Analyse de données',
+    institution: 'Gomycode',
+    period: '2025',
+    location: 'Dakar, Sénégal',
+    type: 'Bootcamp',
+  },
+  {
+    title: 'Master 1 en Virtualisation & Cloud Computing',
+    institution: "Institut Supérieur d'Informatique (ISI)",
+    period: '2025',
+    location: 'Dakar, Sénégal',
+    type: 'Master',
+  },
+  {
+    title: 'Séminaire en Gestion Relation Client',
+    institution: 'Business Communication Center (BCC)',
+    period: '2024',
+    location: 'Dakar, Sénégal',
+    type: 'Séminaire',
+  },
+  {
+    title: 'Bootcamp FullStack JavaScript',
+    institution: 'Gomycode',
+    period: '2023 – 2024',
+    location: 'Dakar, Sénégal',
+    type: 'Bootcamp',
+  },
+  {
+    title: 'Licence en Management Informatisé des Organisations',
+    institution: 'Université Iba Der Thiam',
+    period: '2020 – 2023',
+    location: 'Thiès, Sénégal',
+    type: 'Licence',
+  },
+];
+
+export interface Certification {
+  title: string;
+  issuer: string;
+  icon: string;
+  badge: string;
+}
+
+export const certifications: Certification[] = [
+  {
+    title: 'CCNA : Introduction aux réseaux',
+    issuer: 'Cisco Networking Academy',
+    icon: Network,
+    badge: 'bg-sky-500/40 text-white border border-sky-500/60',
+  },
+  {
+    title: 'CCNA : Commutation, routage et bases du sans-fil',
+    issuer: 'Cisco Networking Academy',
+    icon: Cable,
+    badge: 'bg-blue-500/40 text-white border border-blue-500/60',
+  },
+  {
+    title: 'Certificat de formation — Intégration des instructeurs',
+    issuer: 'Gomycode',
+    icon: Presentation,
+    badge: 'bg-amber-500/40 text-white border border-amber-500/60',
+  },
+  {
+    title: 'Certificat de réussite — Bootcamp Full-Stack JavaScript',
+    issuer: 'Gomycode',
+    icon: Laptop,
+    badge: 'bg-fuchsia-500/40 text-white border border-fuchsia-500/60',
+  },
+  {
+    title: 'Certificat de réussite — Analyse de données (Power BI)',
+    issuer: 'Microsoft / Gomycode',
+    icon: BarChart3,
+    badge: 'bg-emerald-500/40 text-white border border-emerald-500/60',
+  },
+];
+
+export interface Testimonial {
+  quote: string;
+  clientName: string;
+  clientTitle: string;
+  rating: number;
+}
+

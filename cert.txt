@@ -1,0 +1,58 @@
+export const certifications: Certification[] = [
+  {
+    title: 'CCNA : Introduction aux réseaux',
+    issuer: 'Cisco Networking Academy',
+    icon: Network,
+    badge: 'bg-sky-500/40 text-white border border-sky-500/60',
+  },
+  {
+    title: 'CCNA : Commutation, routage et bases du sans-fil',
+    issuer: 'Cisco Networking Academy',
+    icon: Cable,
+    badge: 'bg-blue-500/40 text-white border border-blue-500/60',
+  },
+  {
+    title: 'Certificat de formation — Intégration des instructeurs',
+    issuer: 'Gomycode',
+    icon: Presentation,
+    badge: 'bg-amber-500/40 text-white border border-amber-500/60',
+  },
+  {
+    title: 'Certificat de réussite — Bootcamp Full-Stack JavaScript',
+    issuer: 'Gomycode',
+    icon: Laptop,
+    badge: 'bg-fuchsia-500/40 text-white border border-fuchsia-500/60',
+  },
+  {
+    title: 'Certificat de réussite — Analyse de données (Power BI)',
+    issuer: 'Microsoft / Gomycode',
+    icon: BarChart3,
+    badge: 'bg-emerald-500/40 text-white border border-emerald-500/60',
+  },
+];
+
+export interface Testimonial {
+  quote: string;
+  clientName: string;
+  clientTitle: string;
+  rating: number;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Une excellente collaboration ! M. THIAM a fait preuve d'une grande rigueur technique et d'une capacité à résoudre les problèmes rapidement.",
+    clientName: 'M. Ndiaye',
+    clientTitle: 'Directeur, SUNU DOM',
+    rating: 5,
+  },
+  {
+    quote:
+      "J'ai été impressionné par la qualité du code et l'attention aux détails, notamment sur la partie UI/UX. Le projet a été livré dans les délais.",
+    clientName: 'M. Ndiaye',
+    clientTitle: 'Fondateur, IND Location',
+    rating: 5,
+  },
+];
+
+export const awardsIcon = Award;
