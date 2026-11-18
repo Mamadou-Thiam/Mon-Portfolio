@@ -1,62 +1,55 @@
-import { GraduationCap, MapPin } from 'lucide-react';
-import { education } from '../data/portfolio';
+import { certifications, education } from '../data/portfolio';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 
-const typeStyles: Record<string, string> = {
-  Master: 'bg-accent-violet/40 text-white border-accent-violet/60',
-  Bootcamp: 'bg-accent-sky/40 text-white border-accent-sky/60',
-  Licence: 'bg-emerald-500/40 text-white border-emerald-500/60',
-  Séminaire: 'bg-amber-500/40 text-white border-amber-500/60',
-};
-
 function Education() {
   return (
-    <section id="education" className="section-shell bg-base-900/40">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="container relative">
+    <section id="education" className="section rule-top">
+      <div className="container">
         <SectionHeading
-          eyebrow="Formation"
-          title={
-            <>
-              Parcours <span className="text-gradient">académique</span>
-            </>
-          }
-          subtitle="Des diplômes et formations continues qui nourrissent ma pratique technique."
+          eyebrow="Formation & certifications"
+          title="Un parcours construit dans la durée"
+          subtitle="Diplômes, bootcamps et certifications qui soutiennent ma pratique de l’infrastructure et du développement."
         />
 
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {education.map((item, index) => (
-            <Reveal key={item.title} delay={(index % 3) * 90}>
-              <article className="card-premium hover-glow group h-full p-6">
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <span
-                    className={`rounded-full border px-3 py-1 text-xs font-medium ${
-                      typeStyles[item.type] ?? 'bg-white/10 text-slate-300 border-white/10'
-                    }`}
-                  >
-                    {item.type}
-                  </span>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-accent-indigo transition-transform duration-500 group-hover:scale-110">
-                    <GraduationCap className="h-4 w-4" />
-                  </span>
-                </div>
+        <div className="mt-14 grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Formation</h3>
+            <ol className="mt-5 border-t border-[rgb(var(--rule))]">
+              {education.map((item, index) => (
+                <Reveal key={`${item.title}-${index}`} delay={(index % 3) * 50}>
+                  <li className="grid gap-2 border-b border-[rgb(var(--rule))] py-5 sm:grid-cols-[6rem_1fr] sm:gap-5">
+                    <span className="text-xs tabular-nums text-accent-indigo">{item.period}</span>
+                    <div>
+                      <p className="font-display text-lg leading-snug text-white">{item.title}</p>
+                      <p className="mt-1 text-sm text-slate-400">{item.institution}</p>
+                      <p className="mt-1 text-xs text-slate-500">{item.location}</p>
+                    </div>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
 
-                <h3 className="font-display text-base font-semibold leading-snug text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm font-medium text-accent-sky">{item.institution}</p>
-
-                <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5" />
-                    {item.location}
-                  </span>
-                  <span className="font-medium">{item.period}</span>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+          <div id="certifications">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Certifications</h3>
+            <ul className="mt-5 border-t border-[rgb(var(--rule))]">
+              {certifications.map((cert, index) => {
+                const Icon = cert.icon;
+                return (
+                  <Reveal key={cert.title} delay={(index % 3) * 50}>
+                    <li className="flex items-start gap-4 border-b border-[rgb(var(--rule))] py-5">
+                      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" aria-hidden="true" />
+                      <div>
+                        <p className="text-sm font-medium leading-snug text-white">{cert.title}</p>
+                        <p className="mt-1 text-xs text-slate-500">{cert.issuer}</p>
+                      </div>
+                    </li>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

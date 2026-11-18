@@ -4,8 +4,8 @@ export type Theme = 'dark' | 'light';
 
 const STORAGE_KEY = 'portfolio-theme';
 const THEME_COLORS: Record<Theme, string> = {
-  dark: '#050509',
-  light: '#f6f7fa',
+  dark: '#101112',
+  light: '#f7f6f2',
 };
 
 function readStoredTheme(): Theme | null {
@@ -17,15 +17,14 @@ function readStoredTheme(): Theme | null {
   }
 }
 
+/** Interface lumineuse par défaut ; le mode sombre reste un choix explicite. */
 function getInitialTheme(): Theme {
-  const stored = readStoredTheme();
-  if (stored) return stored;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  return readStoredTheme() === 'dark' ? 'dark' : 'light';
 }
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
-  root.classList.toggle('light', theme === 'light');
+  root.classList.toggle('dark', theme === 'dark');
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[theme]);
 }
 
@@ -35,7 +34,7 @@ function animateThemeChange() {
   const root = document.documentElement;
   root.classList.add('theme-animating');
   window.clearTimeout(animTimeout);
-  animTimeout = window.setTimeout(() => root.classList.remove('theme-animating'), 400);
+  animTimeout = window.setTimeout(() => root.classList.remove('theme-animating'), 260);
 }
 
 export function useTheme() {

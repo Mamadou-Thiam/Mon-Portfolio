@@ -3,65 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050509" />
+    <meta name="theme-color" content="#f7f6f2" />
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('portfolio-theme');
-          var light =
-            stored === 'light' ||
-            (!stored && window.matchMedia('(prefers-color-scheme: light)').matches);
-          document.documentElement.classList.toggle('light', light);
+          var dark = localStorage.getItem('portfolio-theme') === 'dark';
+          document.documentElement.classList.toggle('dark', dark);
           document
             .querySelector('meta[name="theme-color"]')
-            .setAttribute('content', light ? '#f6f7fa' : '#050509');
+            .setAttribute('content', dark ? '#101112' : '#f7f6f2');
         } catch (e) {}
       })();
     </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Mamadou THIAM" />
 
-    <title>Mamadou THIAM | MERN Stack Developer &amp; Cloud DevOps</title>
+    <title>Mamadou THIAM — Ingénieur Systèmes, Réseaux & Cloud | Développeur Full Stack</title>
     <meta
       name="description"
-      content="Portfolio de Mamadou THIAM, MERN Stack Developer & Cloud/DevOps Engineer. Développement web full-stack, cloud AWS, Docker, Kubernetes, Terraform et infrastructure haute disponibilité."
+      content="Portfolio de Mamadou THIAM, ingénieur systèmes, réseaux & cloud, développeur full stack MERN et instructeur en développement web à Dakar. Projets, expériences et compétences."
     />
     <meta name="author" content="Mamadou THIAM" />
     <meta
       name="keywords"
-      content="Mamadou THIAM, MERN Stack, React, Node.js, DevOps, Cloud, AWS, Docker, Kubernetes, Terraform, Développeur Full Stack, Dakar, Sénégal"
+      content="Mamadou THIAM, ingénieur cloud, systèmes et réseaux, développeur full stack, MERN, React, Node.js, Proxmox, Docker, Dakar, Sénégal"
     />
     <link rel="canonical" href="https://mamadou-thiam.dev/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Mamadou THIAM | MERN Stack Developer & Cloud DevOps" />
+    <meta
+      property="og:title"
+      content="Mamadou THIAM — Ingénieur Systèmes, Réseaux & Cloud | Développeur Full Stack"
+    />
     <meta
       property="og:description"
-      content="Développeur Full-Stack MERN & Cloud/DevOps Engineer. De l'idée à la production, je conçois des solutions web robustes et des infrastructures scalables."
+      content="Ingénieur systèmes, réseaux & cloud, développeur full stack MERN et instructeur à Dakar. Découvrez mes projets et mon parcours."
     />
     <meta property="og:image" content="/assets/momo.jpeg" />
     <meta property="og:url" content="https://mamadou-thiam.dev/" />
     <meta property="og:site_name" content="Mamadou THIAM" />
+    <meta property="og:locale" content="fr_FR" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mamadou THIAM | MERN Stack Developer & Cloud DevOps" />
+    <meta
+      name="twitter:title"
+      content="Mamadou THIAM — Ingénieur Systèmes, Réseaux & Cloud | Développeur Full Stack"
+    />
     <meta
       name="twitter:description"
-      content="Développeur Full-Stack MERN & Cloud/DevOps Engineer basé à Dakar, Sénégal."
+      content="Ingénieur systèmes, réseaux & cloud, développeur full stack MERN et instructeur basé à Dakar."
     />
     <meta name="twitter:image" content="/assets/momo.jpeg" />
 
-    <!-- Fonts -->
+    <!-- Fonts : Inter pour l'interface, Newsreader pour la voix éditoriale -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
       rel="stylesheet"
     />
 
@@ -71,7 +77,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mamadou THIAM",
-        "jobTitle": "MERN Stack Developer & Cloud DevOps Engineer",
+        "jobTitle": "Ingénieur Systèmes, Réseaux & Cloud; Développeur Full Stack; Instructeur en développement web",
         "url": "https://mamadou-thiam.dev/",
         "image": "/assets/momo.jpeg",
         "address": {
@@ -85,14 +91,16 @@
           "https://github.com/Mamadou-Thiam"
         ],
         "knowsAbout": [
+          "Ingénierie systèmes et réseaux",
+          "Cloud computing",
+          "Virtualisation",
+          "Proxmox VE",
+          "Docker",
+          "Linux",
           "React.js",
           "Node.js",
           "MongoDB",
           "Express.js",
-          "AWS",
-          "Docker",
-          "Kubernetes",
-          "Terraform",
           "CI/CD"
         ]
       }

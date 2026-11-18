@@ -5,13 +5,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Newsreader', 'Georgia', 'serif'],
       },
       colors: {
-        /*
-         * Couleurs pilotées par variables CSS (définies dans src/index.css).
-         * Les valeurs sont redéfinies sur `html.light` pour basculer le thème.
-         */
+        /* Couleurs sémantiques pilotées par les variables CSS de src/index.css. */
         base: {
           950: 'rgb(var(--rgb-base-950) / <alpha-value>)',
           900: 'rgb(var(--rgb-base-900) / <alpha-value>)',
@@ -20,9 +17,10 @@ export default {
           700: 'rgb(var(--rgb-base-700) / <alpha-value>)',
         },
         accent: {
-          indigo: '#6366F1',
-          violet: '#4F46E5',
-          sky: '#0EA5E9',
+          /* Accent unique, volontairement discret : terre brûlée. */
+          indigo: '#9B5A3B',
+          violet: '#6F6255',
+          sky: '#3F5A6B',
         },
         cream: 'rgb(var(--rgb-cream) / <alpha-value>)',
         white: 'rgb(var(--rgb-white) / <alpha-value>)',
@@ -57,61 +55,19 @@ export default {
         },
       },
       maxWidth: {
-        container: '1200px',
+        container: '1160px',
       },
       boxShadow: {
-        glow: '0 0 40px -10px rgba(99, 102, 241, 0.5)',
-        'glow-sky': '0 0 40px -10px rgba(14, 165, 233, 0.5)',
-        card: '0 20px 40px -20px rgba(0, 0, 0, 0.8)',
+        /* Ombres à peine perceptibles : la hiérarchie passe par l'espace et les filets. */
+        glow: '0 1px 2px rgba(18, 20, 22, 0.06)',
+        'glow-sky': '0 1px 2px rgba(18, 20, 22, 0.06)',
+        card: '0 14px 40px -32px rgba(18, 20, 22, 0.45)',
       },
       backgroundImage: {
-        'grid-fade':
-          'linear-gradient(to right, rgb(var(--rgb-white) / 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--rgb-white) / 0.04) 1px, transparent 1px)',
-        'brand-gradient':
-          'linear-gradient(120deg, #6366F1 0%, #4F46E5 40%, #0EA5E9 100%)',
+        'brand-gradient': 'linear-gradient(90deg, #9B5A3B 0%, #9B5A3B 100%)',
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-14px)' },
-        },
-        'float-slow': {
-          '0%, 100%': { transform: 'translateY(0) translateX(0)' },
-          '50%': { transform: 'translateY(-22px) translateX(10px)' },
-        },
-        'gradient-pan': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        'pulse-glow': {
-          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-          '50%': { opacity: '0.7', transform: 'scale(1.05)' },
-        },
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-        blink: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' },
-        },
-        shimmer: {
-          '100%': { transform: 'translateX(100%)' },
-        },
-        'spin-slow': {
-          to: { transform: 'rotate(360deg)' },
-        },
-      },
-      animation: {
-        float: 'float 6s ease-in-out infinite',
-        'float-slow': 'float-slow 9s ease-in-out infinite',
-        'gradient-pan': 'gradient-pan 8s ease infinite',
-        'pulse-glow': 'pulse-glow 6s ease-in-out infinite',
-        marquee: 'marquee 30s linear infinite',
-        blink: 'blink 1s step-end infinite',
-        shimmer: 'shimmer 2.5s infinite',
-        'spin-slow': 'spin-slow 24s linear infinite',
-      },
+      keyframes: {},
+      animation: {},
     },
   },
   plugins: [],

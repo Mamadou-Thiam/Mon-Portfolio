@@ -1,77 +1,57 @@
-import { Briefcase, Check, MapPin } from 'lucide-react';
 import { experiences } from '../data/portfolio';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 
 function ProfessionalExperience() {
   return (
-    <section id="experience" className="section-shell">
-      <div className="container relative">
+    <section id="experience" className="section rule-top bg-base-900/40">
+      <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <SectionHeading
           eyebrow="Parcours"
           title={
             <>
-              Expériences <span className="text-gradient">professionnelles</span>
+              Expériences <span className="italic text-accent-indigo">professionnelles</span>
             </>
           }
-          subtitle="Mon parcours et les missions qui ont forgé mon expertise full-stack et cloud."
+          subtitle="Enseignement, développement freelance et mission en entreprise : les contextes dans lesquels je travaille."
         />
 
-        <div className="relative mx-auto mt-16 max-w-4xl">
-          {/* Timeline line */}
-          <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-accent-indigo/70 via-accent-sky/40 to-transparent sm:left-5" />
+        <ol className="border-l border-[rgb(var(--rule))] pl-7 sm:pl-9">
+          {experiences.map((exp, index) => (
+            <li key={`${exp.company}-${index}`} className={`relative ${index > 0 ? 'mt-11' : ''}`}>
+              <span
+                className={`absolute -left-[calc(1.75rem+4px)] top-2 h-[9px] w-[9px] rounded-full border-2 border-base-950 sm:-left-[calc(2.25rem+4px)] ${
+                  exp.current ? 'bg-accent-indigo' : 'bg-slate-500'
+                }`}
+                aria-hidden="true"
+              />
+              <Reveal delay={index * 60}>
+                <article>
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                    <h3 className="font-display text-2xl tracking-[-0.01em] text-white">{exp.title}</h3>
+                    <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-500">
+                      {exp.period}
+                    </span>
+                  </div>
 
-          <ol className="space-y-6">
-            {experiences.map((exp, index) => (
-              <li key={`${exp.company}-${index}`} className="relative pl-14 sm:pl-16">
-                {/* Node */}
-                <span className="absolute left-0 top-6 flex h-8 w-8 items-center justify-center rounded-full border border-accent-indigo/40 bg-base-950 sm:left-1">
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-gradient">
-                    {exp.current && (
-                      <span className="absolute h-8 w-8 animate-ping rounded-full bg-accent-indigo/30" />
-                    )}
-                  </span>
-                </span>
+                  <p className="mt-1.5 text-sm text-slate-400">
+                    {exp.company} <span className="mx-2 text-slate-600">·</span> {exp.type}
+                    <span className="mx-2 text-slate-600">·</span> {exp.location}
+                  </p>
 
-                <Reveal direction="up" delay={index * 60}>
-                  <article className="card-premium hover-glow p-6 sm:p-7">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <h3 className="font-display text-lg font-semibold text-white">{exp.title}</h3>
-                        <p className="mt-1 flex items-center gap-2 text-sm font-medium text-accent-sky">
-                          <Briefcase className="h-3.5 w-3.5" />
-                          {exp.company}
-                        </p>
-                      </div>
-                      <div className="flex flex-shrink-0 flex-col items-start gap-2 sm:items-end">
-                        <span className="rounded-full border border-accent-indigo/30 bg-accent-indigo/10 px-3 py-1 text-xs font-medium text-indigo-200">
-                          {exp.type}
-                        </span>
-                        <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                          {exp.period}
-                        </span>
-                      </div>
-                    </div>
-
-                    <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-500">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {exp.location}
-                    </p>
-
-                    <ul className="mt-5 space-y-2.5">
-                      {exp.tasks.map((task) => (
-                        <li key={task} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
-                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-indigo" />
-                          {task}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-        </div>
+                  <ul className="mt-5 space-y-2">
+                    {exp.tasks.map((task) => (
+                      <li key={task} className="flex gap-3 text-sm leading-relaxed text-slate-300">
+                        <span className="mt-2 h-px w-4 shrink-0 bg-accent-indigo/60" aria-hidden="true" />
+                        {task}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

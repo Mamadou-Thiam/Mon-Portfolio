@@ -1,157 +1,169 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Menu, Moon, Sun, X, Terminal } from 'lucide-react';
-import { navLinks, profile } from '../data/portfolio';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Download, Menu, Moon, Sun, X } from 'lucide-react';
+import { cvFiles, navLinks } from '../data/portfolio';
 import { useActiveSection, useScrolled } from '../hooks/useActiveSection';
 import { useTheme } from '../hooks/useTheme';
-import WhatsAppIcon from './WhatsAppIcon';
+import { navigateTo } from '../utils/navigation';
+import MobileBottomNav from './MobileBottomNav';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const scrolled = useScrolled(40);
-  const ids = useMemo(() => navLinks.map((link) => link.id), []);
+  const scrolled = useScrolled(24);
+  const ids = useMemo(() => navLinks.filter((link) => link.id !== 'blog').map((link) => link.id), []);
   const active = useActiveSection(ids);
   const { theme, toggleTheme } = useTheme();
+  const firstLinkRef = useRef<HTMLButtonElement | null>(null);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
 
   const goTo = (id: string) => {
     setOpen(false);
-    if (id === 'blog') {
-      window.location.hash = '/blog';
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    navigateTo(id);
   };
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    firstLinkRef.current?.focus();
     return () => {
+      document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
     };
   }, [open]);
 
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth < 768) setOpen(false);
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? 'border-b border-white/10 bg-base-950/70 backdrop-blur-xl' : 'border-b border-transparent'
+    <>
+      <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled || open
+          ? 'border-b border-[rgb(var(--rule))] bg-base-950/95 backdrop-blur-sm'
+          : 'border-b border-transparent bg-base-950/80'
       }`}
     >
-      <nav className="container flex h-16 items-center justify-between lg:h-20">
+      <nav className="container flex h-[72px] items-center justify-between gap-4" aria-label="Navigation principale">
         <button
           onClick={() => goTo('home')}
-          className="group flex items-center gap-2.5 font-display text-lg font-bold text-white"
-          aria-label="Retour en haut"
+          className="group flex items-center gap-3 font-display text-xl tracking-[-0.02em] text-white"
+          aria-label="Mamadou THIAM — retour à l'accueil"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-accent-indigo transition-colors group-hover:border-accent-indigo/50">
-            <Terminal className="h-4 w-4" />
-          </span>
-          <span className="hidden sm:inline">
-            Mamadou <span className="text-gradient">THIAM</span>
+          <span className="h-2 w-2 rounded-full bg-accent-indigo transition-transform duration-300 group-hover:scale-125" />
+          <span>
+            Mamadou <span className="italic">Thiam</span>
           </span>
         </button>
 
-        <ul className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((link) => {
-            const isActive = active === link.id;
-            return (
-              <li key={link.id}>
-                <button
-                  onClick={() => goTo(link.id)}
-                  aria-current={isActive ? 'true' : undefined}
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    isActive ? 'text-white' : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute inset-x-3 -bottom-0.5 h-px origin-center bg-brand-gradient transition-transform duration-300 ${
-                      isActive ? 'scale-x-100' : 'scale-x-0'
-                    }`}
-                  />
-                </button>
-              </li>
-            );
-          })}
+        <ul className="hidden items-center gap-7 lg:flex">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <button
+                type="button"
+                onClick={() => goTo(link.id)}
+                aria-current={active === link.id ? 'page' : undefined}
+                className={`text-sm transition-colors duration-200 ${
+                  active === link.id ? 'text-accent-indigo' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </button>
+            </li>
+          ))}
         </ul>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href={profile.whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Discuter sur WhatsApp"
-            title="Discuter sur WhatsApp"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] transition-all hover:bg-[#25D366]/20 hover:shadow-glow"
+            href={cvFiles[0].file}
+            download={cvFiles[0].download}
+            className="hidden items-center gap-2 border border-[rgb(var(--rule))] px-4 py-2 text-xs font-medium text-white transition-colors hover:border-accent-indigo hover:text-accent-indigo sm:inline-flex"
           >
-            <WhatsAppIcon className="h-5 w-5" />
+            <Download className="h-3.5 w-3.5" aria-hidden="true" />
+            CV
           </a>
 
           <button
+            type="button"
             onClick={toggleTheme}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white transition-all hover:border-accent-indigo/50 hover:text-accent-indigo"
+            className="flex h-9 w-9 items-center justify-center text-slate-400 transition-colors hover:text-accent-indigo"
             aria-label={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
-            aria-pressed={theme === 'light'}
+            aria-pressed={theme === 'dark'}
             title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
           >
-            <span className="relative block h-5 w-5">
-              <Sun
-                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ${
-                  theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
-                }`}
-              />
-              <Moon
-                className={`absolute inset-0 h-5 w-5 transition-all duration-300 ${
-                  theme === 'light' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'
-                }`}
-              />
-            </span>
+            {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
           </button>
 
-
-
           <button
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white lg:hidden"
+            ref={toggleRef}
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="hidden h-9 w-9 items-center justify-center text-white md:flex lg:hidden"
             aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
             aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Menu mobile : panneau plein écran, sobre et hiérarchisé */}
       <div
-        className={`overflow-hidden border-t border-white/10 bg-base-950/95 backdrop-blur-xl transition-[max-height,opacity] duration-500 lg:hidden ${
-          open ? 'max-h-[34rem] opacity-100' : 'max-h-0 opacity-0'
+        id="mobile-menu"
+        className={`fixed inset-x-0 top-[72px] bottom-0 hidden overflow-y-auto border-t border-[rgb(var(--rule))] bg-base-950 transition-opacity duration-200 md:block lg:hidden ${
+          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
+        aria-hidden={!open}
       >
-        <ul className="container flex flex-col py-4">
-          {navLinks.map((link, index) => (
-            <li
-              key={link.id}
-              style={{ transitionDelay: `${open ? index * 40 : 0}ms` }}
-              className={`transform transition-all duration-300 ${
-                open ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
-              }`}
-            >
-              <button
-                onClick={() => goTo(link.id)}
-                className={`flex w-full items-center justify-between border-b border-white/5 py-3.5 text-left text-base font-medium ${
-                  active === link.id ? 'text-accent-sky' : 'text-slate-300'
-                }`}
-              >
-                {link.label}
-                <span className="text-xs text-slate-600">0{index + 1}</span>
-              </button>
-            </li>
-          ))}
-          <li className="pt-4">
-            <button onClick={() => goTo('contact')} className="btn-primary w-full">
-              Me contacter
-            </button>
-          </li>
-        </ul>
+        <nav className="container flex min-h-full flex-col py-8" aria-label="Navigation mobile">
+          <ul className="flex-1">
+            {navLinks.map((link, index) => (
+              <li key={link.id} className="border-b border-[rgb(var(--rule))]">
+                <button
+                  ref={index === 0 ? firstLinkRef : undefined}
+                  type="button"
+                  tabIndex={open ? 0 : -1}
+                  onClick={() => goTo(link.id)}
+                  className="flex w-full items-baseline justify-between py-4 text-left"
+                >
+                  <span
+                    className={`font-display text-3xl tracking-[-0.02em] ${
+                      active === link.id ? 'text-accent-indigo' : 'text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                  <span className="text-[11px] tabular-nums text-slate-500">0{index + 1}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={cvFiles[0].file}
+            download={cvFiles[0].download}
+            tabIndex={open ? 0 : -1}
+            className="btn-primary mt-8 self-start"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Télécharger mon CV
+          </a>
+        </nav>
       </div>
-    </header>
+      </header>
+
+      <MobileBottomNav active={active} onNavigate={goTo} />
+    </>
   );
 }
 

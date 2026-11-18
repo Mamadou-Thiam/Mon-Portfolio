@@ -2,47 +2,29 @@ import type { ReactNode } from 'react';
 import Reveal from './Reveal';
 
 interface SectionHeadingProps {
-  eyebrow?: string;
+  eyebrow: string;
   title: ReactNode;
   subtitle?: string;
-  align?: 'center' | 'left';
   className?: string;
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  subtitle,
-  align = 'center',
-  className = '',
-}: SectionHeadingProps) {
-  const alignment = align === 'center' ? 'items-center text-center' : 'items-start text-left';
-
+function SectionHeading({ eyebrow, title, subtitle, className = '' }: SectionHeadingProps) {
   return (
-    <div className={`flex flex-col ${alignment} ${className}`}>
-      {eyebrow && (
-        <Reveal>
-          <span className="eyebrow mb-5">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-indigo" />
-            {eyebrow}
-          </span>
-        </Reveal>
-      )}
-      <Reveal delay={80}>
-        <h2 className="font-display text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
-          {title}
-        </h2>
+    <div className={`max-w-3xl ${className}`}>
+      <Reveal>
+        <span className="eyebrow">
+          <span className="inline-block h-px w-6 bg-accent-indigo" aria-hidden="true" />
+          {eyebrow}
+        </span>
+      </Reveal>
+      <Reveal delay={70}>
+        <h2 className="kicker mt-5 text-balance">{title}</h2>
       </Reveal>
       {subtitle && (
-        <Reveal delay={160}>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            {subtitle}
-          </p>
+        <Reveal delay={140}>
+          <p className="lead mt-5">{subtitle}</p>
         </Reveal>
       )}
-      <Reveal delay={220}>
-        <span className="mt-7 block h-1 w-24 rounded-full bg-brand-gradient" />
-      </Reveal>
     </div>
   );
 }

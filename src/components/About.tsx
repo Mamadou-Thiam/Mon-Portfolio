@@ -1,81 +1,74 @@
-import { Code2, Cloud, GraduationCap, Server, Sparkles } from 'lucide-react';
-import { stats } from '../data/portfolio';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
-import Counter from './ui/Counter';
 
 const domains = [
   {
-    icon: Code2,
-    title: 'Développement Web',
-    text: 'Applications MERN performantes, du design system à la mise en production.',
+    number: '01',
+    title: 'Ingénierie systèmes, réseaux & cloud',
+    text: 'Infrastructure cloud, virtualisation Proxmox VE, Linux et Windows Server, réseaux, sécurité et haute disponibilité.',
   },
   {
-    icon: Cloud,
-    title: 'Cloud & DevOps',
-    text: 'Infrastructure as Code, CI/CD et environnements cloud scalables.',
+    number: '02',
+    title: 'Développement Full Stack MERN',
+    text: 'Applications React, Node.js, Express et MongoDB, de la conception de l’interface à la mise en production.',
   },
   {
-    icon: Server,
-    title: 'Infrastructure',
-    text: 'Virtualisation, haute disponibilité, stockage distribué et supervision.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Formation',
-    text: "Transmission des bonnes pratiques et mentorat de nouveaux talents.",
+    number: '03',
+    title: 'Formation en développement web',
+    text: 'Instructeur chez GoMyCode : enseignement, encadrement d’apprenants et transmission des bonnes pratiques.',
   },
 ];
 
 function About() {
   return (
-    <section id="about" className="section-shell">
-      <div className="container relative">
+    <section id="about" className="section rule-top">
+      <div className="container grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <SectionHeading
           eyebrow="À propos"
           title={
             <>
-              Un profil hybride <span className="text-gradient">Web, Cloud & DevOps</span>
+              Trois domaines, <span className="italic text-accent-indigo">une même exigence</span>.
             </>
           }
-          subtitle="Je conçois des produits web complets et l'infrastructure qui les fait tourner : de l'interface utilisateur jusqu'au déploiement automatisé."
         />
 
-        {/* Domains */}
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {domains.map((domain, index) => (
-            <Reveal key={domain.title} delay={index * 90}>
-              <div className="card-premium hover-glow group h-full p-6">
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent-indigo/25 bg-accent-indigo/10 text-accent-indigo transition-colors group-hover:bg-accent-indigo/20">
-                  <domain.icon className="h-5 w-5" />
-                </div>
-                <h3 className="font-display text-base font-semibold text-white">{domain.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{domain.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <div>
+          <Reveal>
+            <div className="space-y-5 text-base leading-[1.85] text-slate-300">
+              <p>
+                Je travaille à l’intersection de l’ingénierie systèmes, du développement full stack et
+                de la formation. Trois domaines complémentaires qui me permettent de suivre un projet
+                de l’architecture jusqu’à l’interface utilisateur.
+              </p>
+              <p>
+                Mon parcours va d’une Licence en Management Informatisé des Organisations à un Master
+                2 Systèmes, Réseaux et Cloud à l’IAM, en passant par le bootcamp FullStack JavaScript
+                de GoMyCode. J’ai rejoint cet écosystème comme instructeur en développement web en
+                décembre 2024.
+              </p>
+              <p>
+                Chez Sonatel, j’ai développé le back-office de Wesalo avec React, Redux, Express et
+                MongoDB. En freelance, j’ai livré SenPrix, SUNU DOM, JobSen et plusieurs plateformes
+                métier. J’accorde autant d’attention au code qu’à l’infrastructure qui l’exécute&nbsp;:
+                Docker, Proxmox VE, CI/CD et automatisation des déploiements.
+              </p>
+            </div>
+          </Reveal>
 
-        {/* Stats */}
-        <Reveal delay={120}>
-          <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="bg-base-950/60 p-7 text-center">
-                <div className="font-display text-4xl font-bold text-gradient sm:text-5xl">
-                  <Counter value={stat.value} suffix={stat.suffix} />
+          <div className="mt-12 border-t border-[rgb(var(--rule))]">
+            {domains.map((domain, index) => (
+              <Reveal key={domain.number} delay={index * 70}>
+                <div className="grid gap-2 border-b border-[rgb(var(--rule))] py-5 sm:grid-cols-[3rem_1fr] sm:gap-4">
+                  <span className="text-xs tabular-nums text-accent-indigo">{domain.number}</span>
+                  <div>
+                    <h3 className="font-display text-xl tracking-[-0.01em] text-white">{domain.title}</h3>
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{domain.text}</p>
+                  </div>
                 </div>
-                <p className="mt-2 text-xs uppercase tracking-widest text-slate-400">{stat.label}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
-
-        <Reveal delay={160} className="mt-10 flex justify-center">
-          <p className="flex items-center gap-2 text-sm text-slate-500">
-            <Sparkles className="h-4 w-4 text-accent-indigo" />
-            Toujours en veille, toujours en apprentissage.
-          </p>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

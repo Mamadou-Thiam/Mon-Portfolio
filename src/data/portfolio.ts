@@ -1,45 +1,23 @@
 import type { LucideIcon } from 'lucide-react';
-import {
-  Award,
-  BarChart3,
-  Boxes,
-  Building2,
-  Cable,
-  Cloud,
-  Code2,
-  Database,
-  Gauge,
-  Globe,
-  GraduationCap,
-  HardDrive,
-  Laptop,
-  Network,
-  Package,
-  Plane,
-  Presentation,
-  Search,
-  Server,
-  Shield,
-  Shirt,
-  ShoppingCart,
-  Stethoscope,
-  Users,
-  Zap,
-} from 'lucide-react';
+import { BarChart3, Cable, Laptop, Network, Presentation } from 'lucide-react';
+import abnCover from '../assets/abn.png';
+import cmasCover from '../assets/cmas.png';
+import jumellesCover from '../assets/jumelles.png';
+import ndiouroulCover from '../assets/ndiouroul.png';
 
 export interface NavLink {
   id: string;
   label: string;
 }
 
+/** Navigation principale : les sections demandées, sans lien fictif. */
 export const navLinks: NavLink[] = [
   { id: 'home', label: 'Accueil' },
   { id: 'about', label: 'À propos' },
-  { id: 'services', label: 'Services' },
-  { id: 'portfolio', label: 'Projets' },
   { id: 'skills', label: 'Compétences' },
-  { id: 'experience', label: 'Expérience' },
-  { id: 'blog', label: 'Blog' },
+  { id: 'portfolio', label: 'Projets' },
+  { id: 'experience', label: 'Expériences' },
+  { id: 'blog', label: 'Journal' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -47,10 +25,7 @@ export const profile = {
   name: 'Mamadou THIAM',
   firstName: 'Mamadou',
   lastName: 'THIAM',
-  role: 'MERN Stack Developer & Cloud / DevOps Engineer',
-  roleShort: 'MERN Stack Developer & Cloud DevOps',
-  tagline:
-    "De l'architecture à la production, je conçois des applications web performantes et des infrastructures cloud scalables.",
+  role: 'Ingénieur Systèmes, Réseaux & Cloud · Développeur Full Stack',
   email: 'thiammamadou0020@gmail.com',
   phone: '77 468 66 23',
   phoneHref: 'tel:+221774686623',
@@ -71,6 +46,7 @@ export interface CvFile {
   download: string;
 }
 
+/** Les deux CV existants dans /public, tous deux réellement téléchargeables. */
 export const cvFiles: CvFile[] = [
   {
     label: 'CV Développeur',
@@ -79,304 +55,203 @@ export const cvFiles: CvFile[] = [
     download: 'Mamadou_THIAM_CV_DEV.pdf',
   },
   {
-    label: 'CV DevOps',
-    hint: 'Cloud & DevOps',
+    label: 'CV Cloud & DevOps',
+    hint: 'Systèmes, réseaux, infrastructure',
     file: '/Mamadou_THIAM_CV_DEVOPS.pdf',
     download: 'Mamadou_THIAM_CV_DEVOPS.pdf',
   },
 ];
 
-export interface Stat {
-  value: number;
-  suffix: string;
-  label: string;
-}
-
-export const stats: Stat[] = [
-  { value: 10, suffix: '+', label: 'Projets livrés' },
-  { value: 2, suffix: '+', label: "Années d'expérience" },
-  { value: 5, suffix: '', label: 'Certifications' },
-  { value: 6, suffix: '', label: 'Technologies maîtrisées' },
-];
-
-export const techMarquee: string[] = [
-  'React',
-  'TypeScript',
-  'Node.js',
-  'Express',
-  'MongoDB',
-  'AWS',
-  'Docker',
-  'Kubernetes',
-  'Terraform',
-  'Ansible',
-  'Jenkins',
-  'Linux',
-  'Proxmox',
-  'Power BI',
-];
-
-export interface Service {
+export interface SkillCategory {
   title: string;
-  description: string;
-  icon: LucideIcon;
-  gradient: string;
+  skills: string[];
+  note?: string;
 }
 
-export const services: Service[] = [
+export const skillCategories: SkillCategory[] = [
   {
-    title: 'Développement Web',
-    description:
-      'Interfaces modernes et réactives avec React.js et TypeScript. Focus UX, accessibilité et performances.',
-    icon: Code2,
-    gradient: 'from-accent-indigo to-accent-sky',
+    title: 'Cloud & Infrastructure',
+    skills: ['AWS', 'Azure', 'Amazon S3', 'IAM', 'Haute disponibilité', 'Stockage distribué (Ceph)'],
   },
   {
-    title: 'Applications Full-Stack',
-    description:
-      'Applications MERN complètes : APIs RESTful robustes avec Node.js, Express.js et bases MongoDB/SQL.',
-    icon: Server,
-    gradient: 'from-emerald-500 to-teal-500',
+    title: 'Systèmes & Réseaux',
+    skills: ['Linux', 'Windows Server', 'TCP/IP', 'Routage & commutation', 'DNS', 'Zabbix', 'Nagios', 'Prometheus'],
   },
   {
-    title: 'Cloud & DevOps',
-    description:
-      'CI/CD, Docker, Kubernetes, Terraform, AWS. Infrastructure as Code et automatisation de bout en bout.',
-    icon: Cloud,
-    gradient: 'from-accent-violet to-fuchsia-500',
+    title: 'DevOps & Virtualisation',
+    skills: ['Docker', 'Proxmox VE', 'VMware ESXi', 'Kubernetes', 'Terraform', 'Ansible', 'Jenkins', 'CI/CD'],
   },
   {
-    title: 'Infrastructure & Systèmes',
-    description:
-      'Virtualisation Proxmox/VMware, haute disponibilité, stockage distribué Ceph et administration Linux.',
-    icon: HardDrive,
-    gradient: 'from-slate-500 to-slate-700',
+    title: 'Développement Frontend',
+    skills: ['React.js', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Redux', 'Bootstrap'],
   },
   {
-    title: 'Solutions digitales',
-    description:
-      'Conception de plateformes métier sur mesure : e-commerce, immobilier, éducation, gestion et data.',
-    icon: Zap,
-    gradient: 'from-amber-500 to-orange-500',
+    title: 'Développement Backend',
+    skills: ['Node.js', 'Express.js', 'API REST', 'JWT', 'Python'],
   },
   {
-    title: 'Formation & Intégration IA',
-    description:
-      "Mentorat et transmission des bonnes pratiques, ainsi que l'intégration d'outils d'IA dans vos produits.",
-    icon: GraduationCap,
-    gradient: 'from-sky-500 to-cyan-500',
+    title: 'Bases de données & Outils',
+    skills: ['MongoDB', 'SQL', 'SQLite', 'Git', 'GitHub', 'GitLab', 'Power BI'],
   },
 ];
 
-export const projectCategories = [
-  'Sites vitrines',
-  'Applications & outils',
-  'Cloud & infrastructure',
-] as const;
+/** Ordre d'affichage de la sélection mise en avant. */
+export const highlightedProjectTitles = [
+  'ABN Immobilier & Investissement',
+  'CMAS — Cabinet Médical Ahmadina Saliou',
+  'Ndiouroul Voyage',
+  'Jumelles Amar',
+];
 
-export type ProjectCategory = (typeof projectCategories)[number];
+export type ProjectCategory = 'Applications web' | 'Gestion métier' | 'Cloud & infrastructure';
 
 export interface Project {
   title: string;
   description: string;
-  icon: LucideIcon;
+  problem: string;
   tags: string[];
-  url?: string;
-  github?: string;
-  color: string;
-  colorBg: string;
   category: ProjectCategory;
-  featured?: boolean;
+  context?: string;
+  /** Lien réel existant. Absent lorsque le projet n'a pas de démonstration publique. */
+  url?: string;
+  /** Couverture réelle, réservée aux projets de la sélection mise en avant (imports ci-dessus). */
+  image?: string;
+  /** Projets mis en avant dans la sélection éditoriale en tête de section. */
+  highlight?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    title: 'Jumelles Amar',
-    description:
-      "Site vitrine d'une maison de haute couture à Dakar : créations sur mesure, collections d'exception, savoir-faire artisanal et prise de contact en ligne.",
-    icon: Shirt,
-    tags: ['React.js', 'Web Design', 'Mode', 'SEO'],
-    url: 'https://www.jumellesamar.com',
-    color: '#d4af37',
-    colorBg: 'rgba(212,175,55,0.1)',
-    category: 'Sites vitrines',
-    featured: true,
-  },
-  {
     title: 'SenPrix',
     description:
-      "Plateforme de comparaison de prix au Sénégal. Recherche intelligente, suivi des meilleures offres et économies sur les achats en ligne pour des milliers d'utilisateurs.",
-    icon: ShoppingCart,
+      'Plateforme de surveillance et de comparaison des prix des produits de première nécessité au Sénégal.',
+    problem: 'Comparer les prix et repérer les meilleures offres sur une même place.',
     tags: ['React.js', 'Node.js', 'MongoDB', 'Docker', 'API REST'],
+    category: 'Applications web',
+    context: 'Projet freelance',
     url: 'https://senprix-web.onrender.com',
-    github: 'https://github.com/Mamadou-Thiam',
-    color: '#10b981',
-    colorBg: 'rgba(16,185,129,0.1)',
-    category: 'Applications & outils',
-  },
-  {
-    title: 'CMAS — Cabinet Médical Ahmadina Saliou',
-    description:
-      "Site vitrine du Cabinet Médical Ahmadina Saliou : présentation du cabinet et de ses praticiens, liste des consultations et services de santé, prise de rendez-vous et prise de contact en ligne.",
-    icon: Stethoscope,
-    tags: ['React.js', 'Web Design', 'Santé', 'SEO'],
-    url: 'https://cabinetahmadinasaliou.com',
-    color: '#0d9488',
-    colorBg: 'rgba(13,148,136,0.1)',
-    category: 'Sites vitrines',
-  },
-  {
-    title: 'Mounir Digital',
-    description:
-      "Site officiel d'une agence digitale sénégalaise : présentation des services (sites web, applications mobiles, marketing, SEO, branding), réalisations et prise de contact.",
-    icon: Globe,
-    tags: ['React.js', 'Web Design', 'Branding', 'SEO'],
-    url: 'https://www.mounir-digital.com/',
-    color: '#8b5cf6',
-    colorBg: 'rgba(139,92,246,0.1)',
-    category: 'Sites vitrines',
-  },
-  {
-    title: 'ABN Immobilier & Investissement',
-    description:
-      "Plateforme immobilière premium au Sénégal : présentation des biens, services d'investissement et accompagnement personnalisé pour l'achat et la location.",
-    icon: Building2,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Immobilier'],
-    url: 'https://abn-immo.com/',
-    color: '#0284c7',
-    colorBg: 'rgba(2,132,199,0.1)',
-    category: 'Applications & outils',
-  },
-  {
-    title: 'Jobsen',
-    description:
-      "Plateforme de recherche d'emploi connectant candidats et recruteurs avec des outils de matching intelligents.",
-    icon: Search,
-    tags: ['React.js', 'Node.js', 'MongoDB'],
-    url: 'https://jobsen-client.onrender.com',
-    color: '#6366f1',
-    colorBg: 'rgba(99,102,241,0.1)',
-    category: 'Applications & outils',
-  },
-  {
-    title: 'Ndiouroul Voyage',
-    description:
-      "Site web d'une agence de voyages et de tourisme présentant offres, séjours et circuits, avec réservation en ligne.",
-    icon: Plane,
-    tags: ['React.js', 'Tourisme', 'Voyages', 'Web'],
-    url: 'https://www.ndiouroulvoyage.com/',
-    color: '#0ea5e9',
-    colorBg: 'rgba(14,165,233,0.1)',
-    category: 'Sites vitrines',
-  },
-  {
-    title: 'SEN TECH',
-    description:
-      "Plateforme éducative innovante pour l'apprentissage en ligne : cours interactifs et suivi de progression.",
-    icon: GraduationCap,
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Education'],
-    url: 'https://sen-tech-frontend.onrender.com/',
-    color: '#f59e0b',
-    colorBg: 'rgba(245,158,11,0.1)',
-    category: 'Applications & outils',
   },
   {
     title: 'SUNU DOM',
     description:
       "Application de gestion de données d'une pouponnière : suivi des enfants, gestion administrative et rapports.",
-    icon: Users,
-    tags: ['Node.js', 'React.js', 'MongoDB'],
+    problem: "Centraliser le suivi des enfants et la gestion administrative d'une pouponnière.",
+    tags: ['React.js', 'Node.js', 'MongoDB'],
+    category: 'Gestion métier',
+    context: 'Projet freelance',
     url: 'https://sysaccueilmineur-frontend.onrender.com/',
-    color: '#06b6d4',
-    colorBg: 'rgba(6,182,212,0.1)',
-    category: 'Applications & outils',
+  },
+  {
+    title: 'Wesalo BackOffice',
+    description:
+      'Back-office de la plateforme Wesalo développé au sein de la DSI/INS/IMOC de Sonatel avec la stack MERN.',
+    problem: "Offrir aux équipes un outil d'administration des contenus, des comptes et des rôles.",
+    tags: ['React.js', 'Redux', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'AWS S3'],
+    category: 'Gestion métier',
+    context: 'Sonatel · Stage 2023 – 2024',
+  },
+  {
+    title: 'JobSen',
+    description:
+      "Plateforme de recherche d'emploi connectant candidats et recruteurs au Sénégal.",
+    problem: 'Rapprocher les candidats des offres et simplifier la mise en relation avec les recruteurs.',
+    tags: ['React.js', 'Node.js', 'MongoDB'],
+    category: 'Applications web',
+    context: 'Projet freelance',
+    url: 'https://jobsen-client.onrender.com',
+  },
+  {
+    title: 'Jumelles Amar',
+    description:
+      "Site vitrine d'une maison de haute couture à Dakar : créations sur mesure, collections et prise de contact.",
+    problem: "Présenter le savoir-faire de la maison et faciliter la prise de contact en ligne.",
+    tags: ['React.js', 'Web Design', 'SEO'],
+    category: 'Applications web',
+    context: 'Projet freelance',
+    url: 'https://www.jumellesamar.com',
+    image: jumellesCover,
+    highlight: true,
+  },
+  {
+    title: 'Cluster Proxmox VE, Ceph & Docker',
+    description:
+      'Infrastructure virtualisée en haute disponibilité : Proxmox VE, stockage distribué Ceph, sauvegardes automatisées et charges conteneurisées avec Docker.',
+    problem: "Éviter le point de défaillance unique et rendre les déploiements reproductibles.",
+    tags: ['Proxmox VE', 'Ceph', 'Docker', 'Terraform', 'Haute disponibilité'],
+    category: 'Cloud & infrastructure',
+    context: 'Projet d’infrastructure',
+  },
+  {
+    title: 'CMAS — Cabinet Médical Ahmadina Saliou',
+    description:
+      'Site vitrine du cabinet : praticiens, consultations, services de santé et prise de rendez-vous.',
+    problem: 'Rendre les informations du cabinet et la prise de contact facilement accessibles.',
+    tags: ['React.js', 'Web Design', 'SEO'],
+    category: 'Applications web',
+    url: 'https://cabinetahmadinasaliou.com',
+    image: cmasCover,
+    highlight: true,
+  },
+  {
+    title: 'Mounir Digital',
+    description:
+      "Site officiel d'une agence digitale sénégalaise : services, réalisations et prise de contact.",
+    problem: "Donner à l'agence une présence en ligne claire et crédible.",
+    tags: ['React.js', 'Web Design', 'Branding'],
+    category: 'Applications web',
+    url: 'https://www.mounir-digital.com/',
+  },
+  {
+    title: 'ABN Immobilier & Investissement',
+    description:
+      "Plateforme immobilière au Sénégal : présentation des biens, investissement et accompagnement à l'achat et à la location.",
+    problem: 'Présenter l’offre immobilière et accompagner les projets d’investissement.',
+    tags: ['React.js', 'Node.js', 'MongoDB'],
+    category: 'Applications web',
+    url: 'https://abn-immo.com/',
+    image: abnCover,
+    highlight: true,
+  },
+  {
+    title: 'Ndiouroul Voyage',
+    description:
+      "Site d'une agence de voyages et de tourisme : offres, séjours, circuits et réservation en ligne.",
+    problem: 'Présenter les offres et permettre une réservation en ligne.',
+    tags: ['React.js', 'Tourisme', 'Web'],
+    category: 'Applications web',
+    url: 'https://www.ndiouroulvoyage.com/',
+    image: ndiouroulCover,
+    highlight: true,
+  },
+  {
+    title: 'SEN TECH',
+    description: 'Plateforme éducative pour l’apprentissage en ligne : cours et suivi de progression.',
+    problem: 'Rendre l’apprentissage en ligne accessible et suivre la progression des apprenants.',
+    tags: ['React.js', 'Node.js', 'MongoDB'],
+    category: 'Applications web',
+    url: 'https://sen-tech-frontend.onrender.com/',
   },
   {
     title: 'Portfolio Mame Penda',
-    description:
-      "Portfolio personnel moderne et élégant présentant les compétences et réalisations d'une designer créative.",
-    icon: Globe,
-    tags: ['React.js', 'Tailwind CSS', 'Vite', 'Design'],
-    url: 'https://mame-penda-portfolio.onrender.com',
-    color: '#f43f5e',
-    colorBg: 'rgba(244,63,94,0.1)',
-    category: 'Sites vitrines',
+    description: 'Portfolio personnel présentant les compétences et réalisations d’une designer créative.',
+    problem: 'Mettre en valeur un travail créatif dans une interface sobre et lisible.',
+    tags: ['React.js', 'Tailwind CSS', 'Vite'],
+    category: 'Applications web',
   },
   {
     title: 'Njek',
-    description:
-      'Logiciel de gestion de stock complet : inventaires, entrées/sorties et commandes fournisseurs.',
-    icon: Package,
-    tags: ['Python', 'SQLite', 'Gestion de stock', 'Tkinter'],
-    color: '#f97316',
-    colorBg: 'rgba(249,115,22,0.1)',
-    category: 'Applications & outils',
-  },
-  {
-    title: 'Cluster Proxmox & Ceph',
-    description:
-      "Infrastructure haute disponibilité avec Proxmox, stockage distribué Ceph, backup automatisé et orchestration Terraform.",
-    icon: HardDrive,
-    tags: ['Proxmox', 'Ceph', 'Terraform', 'HA'],
-    color: '#64748b',
-    colorBg: 'rgba(100,116,139,0.12)',
-    category: 'Cloud & infrastructure',
+    description: 'Logiciel de gestion de stock : inventaires, entrées/sorties et commandes fournisseurs.',
+    problem: 'Suivre les stocks et les mouvements de marchandises sans tableur dispersé.',
+    tags: ['Python', 'SQLite', 'Tkinter'],
+    category: 'Gestion métier',
   },
   {
     title: 'Serveur FreeNAS',
     description:
       "Déploiement d'une solution de stockage réseau (NAS) pour la centralisation et la sécurisation des données.",
-    icon: Database,
-    tags: ['FreeNAS', 'Storage', 'Network'],
-    color: '#14b8a6',
-    colorBg: 'rgba(20,184,166,0.1)',
+    problem: 'Centraliser les données et mettre en place une sauvegarde réseau fiable.',
+    tags: ['FreeNAS', 'Storage', 'Réseau'],
     category: 'Cloud & infrastructure',
-  },
-];
-
-export interface SkillCategory {
-  title: string;
-  icon: LucideIcon;
-  skills: string[];
-  gradient: string;
-}
-
-export const skillCategories: SkillCategory[] = [
-  {
-    title: 'Frontend',
-    icon: Code2,
-    skills: ['React.js', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'],
-    gradient: 'from-accent-indigo to-accent-sky',
-  },
-  {
-    title: 'Backend',
-    icon: Server,
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'SQL', 'API REST', 'JWT', 'Python'],
-    gradient: 'from-emerald-500 to-teal-500',
-  },
-  {
-    title: 'Cloud & DevOps',
-    icon: Cloud,
-    skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'Jenkins'],
-    gradient: 'from-accent-violet to-fuchsia-500',
-  },
-  {
-    title: 'Infrastructure',
-    icon: Shield,
-    skills: ['Linux', 'Windows Server', 'Proxmox', 'VMware ESXi', 'TrueNAS', 'Ceph'],
-    gradient: 'from-slate-500 to-slate-700',
-  },
-  {
-    title: 'Supervision & Data',
-    icon: Gauge,
-    skills: ['Zabbix', 'Nagios', 'Prometheus', 'Power BI', 'Data Analysis'],
-    gradient: 'from-amber-500 to-orange-500',
-  },
-  {
-    title: 'Outils',
-    icon: Boxes,
-    skills: ['Git', 'GitHub / GitLab', 'CI/CD', 'CRM', 'Automatisation'],
-    gradient: 'from-sky-500 to-cyan-500',
   },
 ];
 
@@ -392,6 +267,37 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    title: 'Instructeur en développement web',
+    company: 'GoMyCode',
+    type: 'Temps partiel',
+    period: '12/2024 – Présent',
+    location: 'Dakar, Sénégal',
+    current: true,
+    tasks: [
+      'Enseignement des technologies web à travers des cours pratiques et théoriques',
+      'Encadrement des apprenants et suivi de projets',
+      'Promotion des bonnes pratiques et des outils modernes',
+    ],
+  },
+  {
+    title: 'Développeur Full Stack',
+    company: 'Freelance',
+    type: 'Indépendant',
+    period: '01/2024 – Présent',
+    location: 'Dakar, Sénégal',
+    current: true,
+    tasks: [
+      'SenPrix — plateforme de comparaison de prix au Sénégal',
+      'SUNU DOM — application de gestion de données d’une pouponnière',
+      'JobSen — plateforme de mise en relation candidats / recruteurs',
+      'ABN Immobilier & Investissement — plateforme immobilière',
+      'SEN TECH — plateforme éducative d’apprentissage en ligne',
+      'Jumelles Amar — site vitrine d’une maison de haute couture',
+      'API REST avec MongoDB — conception d’APIs robustes et sécurisées',
+      'Njek — logiciel de gestion de stock',
+    ],
+  },
+  {
     title: 'Content Manager & Social Media Manager',
     company: 'Mamibi Traiteur',
     type: 'Freelance',
@@ -401,41 +307,7 @@ export const experiences: Experience[] = [
     tasks: [
       'Gestion et animation des pages Facebook et TikTok',
       'Création de contenus visuels et vidéos promotionnelles',
-      'Mise en place de stratégies marketing pour attirer de nouveaux clients',
-      'Rédaction de publications engageantes et optimisation de la visibilité',
-      'Interaction avec la communauté et gestion des messages clients',
-      "Contribution à l'augmentation de la notoriété et des ventes",
-    ],
-  },
-  {
-    title: 'Instructeur Développeur Web',
-    company: 'Gomycode',
-    type: 'Temps partiel',
-    period: '12/2024 – Présent',
-    location: 'Dakar, Sénégal',
-    current: true,
-    tasks: [
-      'Enseignement des technologies web via des cours pratiques et théoriques',
-      'Encadrement des apprenants et suivi de projets',
-      'Promotion des bonnes pratiques et des outils modernes',
-    ],
-  },
-  {
-    title: 'Développeur Web Freelance',
-    company: 'Freelance',
-    type: 'Indépendant',
-    period: '01/2024 – Présent',
-    location: 'Dakar, Sénégal',
-    current: true,
-    tasks: [
-      'ABN Immobilier & Investissement — plateforme immobilière premium',
-      'SenPrix — plateforme de comparaison de prix au Sénégal',
-      'API REST avec MongoDB — conception d’APIs robustes et sécurisées',
-      'Portfolio Mame Penda — portfolio moderne pour une designer',
-      'Jobsen — plateforme de mise en relation candidats / recruteurs',
-      'SEN TECH — plateforme éducative d’apprentissage en ligne',
-      'SUNU DOM — application de gestion de données d’une pouponnière',
-      'Njek — logiciel de gestion de stock complet',
+      'Stratégies marketing et interaction avec la communauté',
     ],
   },
   {
@@ -446,10 +318,10 @@ export const experiences: Experience[] = [
     location: 'Dakar, Sénégal',
     tasks: [
       'Développement du back-office de la plateforme Wesalo avec la stack MERN',
-      'Conception d’interfaces dynamiques et responsives avec React.js et Redux',
-      'Création d’APIs REST sécurisées avec Express.js et intégration de MongoDB',
-      'Mise en place de l’authentification JWT et gestion des rôles utilisateurs',
-      'Intégration AWS S3 et déploiement via onRender',
+      'Interfaces dynamiques et responsives avec React.js et Redux',
+      'APIs REST sécurisées avec Express.js et MongoDB',
+      'Authentification JWT et gestion des rôles utilisateurs',
+      'Intégration AWS S3 et déploiement via Render',
     ],
   },
 ];
@@ -471,13 +343,6 @@ export const education: EducationItem[] = [
     type: 'Master',
   },
   {
-    title: 'Bootcamp en Analyse de données',
-    institution: 'Gomycode',
-    period: '2025',
-    location: 'Dakar, Sénégal',
-    type: 'Bootcamp',
-  },
-  {
     title: 'Master 1 en Virtualisation & Cloud Computing',
     institution: "Institut Supérieur d'Informatique (ISI)",
     period: '2025',
@@ -485,15 +350,15 @@ export const education: EducationItem[] = [
     type: 'Master',
   },
   {
-    title: 'Séminaire en Gestion Relation Client',
-    institution: 'Business Communication Center (BCC)',
-    period: '2024',
+    title: 'Bootcamp en Analyse de données',
+    institution: 'GoMyCode',
+    period: '2025',
     location: 'Dakar, Sénégal',
-    type: 'Séminaire',
+    type: 'Bootcamp',
   },
   {
     title: 'Bootcamp FullStack JavaScript',
-    institution: 'Gomycode',
+    institution: 'GoMyCode',
     period: '2023 – 2024',
     location: 'Dakar, Sénégal',
     type: 'Bootcamp',
@@ -505,13 +370,19 @@ export const education: EducationItem[] = [
     location: 'Thiès, Sénégal',
     type: 'Licence',
   },
+  {
+    title: 'Séminaire en Gestion Relation Client',
+    institution: 'Business Communication Center (BCC)',
+    period: '2024',
+    location: 'Dakar, Sénégal',
+    type: 'Séminaire',
+  },
 ];
 
 export interface Certification {
   title: string;
   issuer: string;
   icon: LucideIcon;
-  badge: string;
 }
 
 export const certifications: Certification[] = [
@@ -519,31 +390,26 @@ export const certifications: Certification[] = [
     title: 'CCNA : Introduction aux réseaux',
     issuer: 'Cisco Networking Academy',
     icon: Network,
-    badge: 'bg-sky-500/40 text-white border border-sky-500/60',
   },
   {
     title: 'CCNA : Commutation, routage et bases du sans-fil',
     issuer: 'Cisco Networking Academy',
     icon: Cable,
-    badge: 'bg-blue-500/40 text-white border border-blue-500/60',
   },
   {
-    title: 'Certificat de formation — Intégration des instructeurs',
-    issuer: 'Gomycode',
+    title: 'Formation — Intégration des instructeurs',
+    issuer: 'GoMyCode',
     icon: Presentation,
-    badge: 'bg-amber-500/40 text-white border border-amber-500/60',
   },
   {
-    title: 'Certificat de réussite — Bootcamp Full-Stack JavaScript',
-    issuer: 'Gomycode',
+    title: 'Bootcamp Full-Stack JavaScript',
+    issuer: 'GoMyCode',
     icon: Laptop,
-    badge: 'bg-fuchsia-500/40 text-white border border-fuchsia-500/60',
   },
   {
-    title: 'Certificat de réussite — Analyse de données (Power BI)',
-    issuer: 'Microsoft / Gomycode',
+    title: 'Analyse de données (Power BI)',
+    issuer: 'Microsoft / GoMyCode',
     icon: BarChart3,
-    badge: 'bg-emerald-500/40 text-white border border-emerald-500/60',
   },
 ];
 
@@ -551,31 +417,19 @@ export interface Testimonial {
   quote: string;
   clientName: string;
   clientTitle: string;
-  rating: number;
 }
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Une excellente collaboration ! M. THIAM a fait preuve d'une grande rigueur technique et d'une capacité à résoudre les problèmes rapidement.",
-    clientName: 'M. Ndiaye',
-    clientTitle: 'Directeur, SUNU DOM',
-    rating: 5,
-  },
-  {
-    quote:
-      "J'ai été impressionné par la qualité du code et l'attention aux détails, notamment sur la partie UI/UX. Le projet a été livré dans les délais.",
-    clientName: 'M. Ndiaye',
-    clientTitle: 'Fondateur, IND Location',
-    rating: 5,
-  },
-  {
-    quote:
-      "Le nouveau site reflète exactement l'élégance de Jumelles Amar. Mamadou a su mettre en valeur nos créations avec beaucoup de goût, tout en garantissant une expérience rapide et facile à utiliser. Un vrai professionnalisme du début à la fin.",
+      'Le nouveau site reflète exactement l’élégance de Jumelles Amar. Mamadou a su mettre en valeur nos créations avec beaucoup de goût, tout en garantissant une expérience rapide et facile à utiliser.',
     clientName: 'Astou Mbene',
     clientTitle: 'PDG, Jumelles Amar',
-    rating: 5,
+  },
+  {
+    quote:
+      'Une excellente collaboration. M. THIAM a fait preuve d’une grande rigueur technique et d’une capacité à résoudre les problèmes rapidement.',
+    clientName: 'M. Ndiaye',
+    clientTitle: 'Directeur, SUNU DOM',
   },
 ];
-
-export const awardsIcon = Award;

@@ -1,46 +1,31 @@
-import { Quote, Star } from 'lucide-react';
 import { testimonials } from '../data/portfolio';
-import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="section-shell bg-base-900/40">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="container relative">
-        <SectionHeading
-          eyebrow="Témoignages"
-          title={
-            <>
-              Ils parlent <span className="text-gradient">de moi</span>
-            </>
-          }
-        />
+    <section className="section rule-top bg-base-900/40" aria-label="Retours clients">
+      <div className="container grid gap-10 lg:grid-cols-[0.45fr_1.55fr] lg:gap-16">
+        <div>
+          <span className="eyebrow">
+            <span className="inline-block h-px w-6 bg-accent-indigo" aria-hidden="true" />
+            Retours clients
+          </span>
+          <p className="mt-5 font-display text-3xl leading-tight tracking-[-0.02em] text-white">
+            Ce que disent les projets.
+          </p>
+        </div>
 
-        <div className="mx-auto mt-16 grid max-w-4xl gap-6 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {testimonials.map((testimonial, index) => (
-            <Reveal key={`${testimonial.clientTitle}-${index}`} delay={index * 120}>
-              <figure className="card-premium hover-glow relative h-full p-8">
-                <Quote className="absolute right-6 top-6 h-8 w-8 text-white/5" />
-
-                <div className="mb-5 flex gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-
-                <blockquote className="text-base italic leading-relaxed text-slate-300">
+            <Reveal key={testimonial.clientName} delay={index * 80}>
+              <figure className="border-t border-[rgb(var(--rule))] pt-6">
+                <blockquote className="font-display text-xl leading-[1.5] text-white">
                   “{testimonial.quote}”
                 </blockquote>
-
-                <figcaption className="mt-7 flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-gradient font-display font-bold text-[#fff]">
-                    {testimonial.clientName.replace(/[^A-Za-zÀ-ÿ]/g, '').charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{testimonial.clientName}</p>
-                    <p className="text-xs text-accent-sky">{testimonial.clientTitle}</p>
-                  </div>
+                <figcaption className="mt-5 text-sm text-slate-400">
+                  <span className="font-medium text-white">{testimonial.clientName}</span>
+                  <span className="mx-2 text-slate-600">—</span>
+                  {testimonial.clientTitle}
                 </figcaption>
               </figure>
             </Reveal>
