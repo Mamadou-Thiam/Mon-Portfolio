@@ -242,7 +242,7 @@ export const projects: Project[] = [
       "Plateforme immobilière premium au Sénégal : présentation des biens, services d'investissement et accompagnement personnalisé pour l'achat et la location.",
     icon: Building2,
     tags: ['React.js', 'Node.js', 'MongoDB', 'Immobilier'],
-    url: 'https://abn-immobilier-frontend.onrender.com/',
+    url: 'https://abn-immo.com/',
     color: '#0284c7',
     colorBg: 'rgba(2,132,199,0.1)',
     category: 'Applications & outils',

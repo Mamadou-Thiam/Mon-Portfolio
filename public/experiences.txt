@@ -1,0 +1,177 @@
+export const projects: Project[] = [
+  {
+    title: 'SenPrix',
+    description:
+      "Plateforme de comparaison de prix au Sénégal. Recherche intelligente, suivi des meilleures offres et économies sur les achats en ligne pour des milliers d'utilisateurs.",
+    icon: ShoppingCart,
+    tags: ['React.js', 'Node.js', 'MongoDB', 'Docker', 'API REST'],
+    url: 'https://senprix-web.onrender.com',
+    github: 'https://github.com/Mamadou-Thiam',
+    color: '#10b981',
+    colorBg: 'rgba(16,185,129,0.1)',
+  },
+  {
+    title: 'CMAS — Cabinet Médical Ahmadina Saliou',
+    description:
+      "Site vitrine du Cabinet Médical Ahmadina Saliou : présentation du cabinet et de ses praticiens, liste des consultations et services de santé, prise de rendez-vous et prise de contact en ligne.",
+    icon: Stethoscope,
+    tags: ['React.js', 'Web Design', 'Santé', 'SEO'],
+    url: 'https://cabinetahmadinasaliou.com',
+    color: '#0d9488',
+    colorBg: 'rgba(13,148,136,0.1)',
+  },
+  {
+    title: 'Mounir Digital',
+    description:
+      "Site officiel d'une agence digitale sénégalaise : présentation des services (sites web, applications mobiles, marketing, SEO, branding), réalisations et prise de contact.",
+    icon: Globe,
+    tags: ['React.js', 'Web Design', 'Branding', 'SEO'],
+    url: 'https://www.mounir-digital.com/',
+    color: '#8b5cf6',
+    colorBg: 'rgba(139,92,246,0.1)',
+  },
+  {
+    title: 'ABN Immobilier & Investissement',
+    description:
+      "Plateforme immobilière premium au Sénégal : présentation des biens, services d'investissement et accompagnement personnalisé pour l'achat et la location.",
+    icon: Building2,
+    tags: ['React.js', 'Node.js', 'MongoDB', 'Immobilier'],
+    url: 'https://abn-immo.com/',
+    color: '#0284c7',
+    colorBg: 'rgba(2,132,199,0.1)',
+  },
+  {
+    title: 'Jobsen',
+    description:
+      "Plateforme de recherche d'emploi connectant candidats et recruteurs avec des outils de matching intelligents.",
+    icon: Search,
+    tags: ['React.js', 'Node.js', 'MongoDB'],
+    url: 'https://jobsen-client.onrender.com',
+    color: '#6366f1',
+    colorBg: 'rgba(99,102,241,0.1)',
+  },
+  {
+    title: 'Ndiouroul Voyage',
+    description:
+      "Site web d'une agence de voyages et de tourisme présentant offres, séjours et circuits, avec réservation en ligne.",
+    icon: Plane,
+    tags: ['React.js', 'Tourisme', 'Voyages', 'Web'],
+    url: 'https://www.ndiouroulvoyage.com/',
+    color: '#0ea5e9',
+    colorBg: 'rgba(14,165,233,0.1)',
+  },
+  {
+    title: 'SEN TECH',
+    description:
+      "Plateforme éducative innovante pour l'apprentissage en ligne : cours interactifs et suivi de progression.",
+    icon: GraduationCap,
+    tags: ['React.js', 'Node.js', 'MongoDB', 'Education'],
+    url: 'https://sen-tech-frontend.onrender.com/',
+    color: '#f59e0b',
+    colorBg: 'rgba(245,158,11,0.1)',
+  },
+  {
+    title: 'SUNU DOM',
+    description:
+      "Application de gestion de données d'une pouponnière : suivi des enfants, gestion administrative et rapports.",
+    icon: Users,
+    tags: ['Node.js', 'React.js', 'MongoDB'],
+    url: 'https://sysaccueilmineur-frontend.onrender.com/',
+    color: '#06b6d4',
+    colorBg: 'rgba(6,182,212,0.1)',
+  },
+  {
+    title: 'Portfolio Mame Penda',
+    description:
+      "Portfolio personnel moderne et élégant présentant les compétences et réalisations d'une designer créative.",
+    icon: Globe,
+    tags: ['React.js', 'Tailwind CSS', 'Vite', 'Design'],
+    url: 'https://mame-penda-portfolio.onrender.com',
+    color: '#f43f5e',
+    colorBg: 'rgba(244,63,94,0.1)',
+  },
+  {
+    title: 'Njek',
+    description:
+      'Logiciel de gestion de stock complet : inventaires, entrées/sorties et commandes fournisseurs.',
+    icon: Package,
+    tags: ['Python', 'SQLite', 'Gestion de stock', 'Tkinter'],
+    color: '#f97316',
+    colorBg: 'rgba(249,115,22,0.1)',
+  },
+  {
+    title: 'Cluster Proxmox & Ceph',
+    description:
+      "Infrastructure haute disponibilité avec Proxmox, stockage distribué Ceph, backup automatisé et orchestration Terraform.",
+    icon: HardDrive,
+    tags: ['Proxmox', 'Ceph', 'Terraform', 'HA'],
+    color: '#64748b',
+    colorBg: 'rgba(100,116,139,0.12)',
+  },
+  {
+    title: 'Serveur FreeNAS',
+    description:
+      "Déploiement d'une solution de stockage réseau (NAS) pour la centralisation et la sécurisation des données.",
+    icon: Database,
+    tags: ['FreeNAS', 'Storage', 'Network'],
+    color: '#14b8a6',
+    colorBg: 'rgba(20,184,166,0.1)',
+  },
+];
+
+export interface SkillCategory {
+  title: string;
+  icon: LucideIcon;
+  skills: string[];
+  gradient: string;
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    title: 'Frontend',
+    icon: Code2,
+    skills: ['React.js', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'],
+    gradient: 'from-accent-indigo to-accent-sky',
+  },
+  {
+    title: 'Backend',
+    icon: Server,
+    skills: ['Node.js', 'Express.js', 'MongoDB', 'SQL', 'API REST', 'JWT', 'Python'],
+    gradient: 'from-emerald-500 to-teal-500',
+  },
+  {
+    title: 'Cloud & DevOps',
+    icon: Cloud,
+    skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'Jenkins'],
+    gradient: 'from-accent-violet to-fuchsia-500',
+  },
+  {
+    title: 'Infrastructure',
+    icon: Shield,
+    skills: ['Linux', 'Windows Server', 'Proxmox', 'VMware ESXi', 'TrueNAS', 'Ceph'],
+    gradient: 'from-slate-500 to-slate-700',
+  },
+  {
+    title: 'Supervision & Data',
+    icon: Gauge,
+    skills: ['Zabbix', 'Nagios', 'Prometheus', 'Power BI', 'Data Analysis'],
+    gradient: 'from-amber-500 to-orange-500',
+  },
+  {
+    title: 'Outils',
+    icon: Boxes,
+    skills: ['Git', 'GitHub / GitLab', 'CI/CD', 'CRM', 'Automatisation'],
+    gradient: 'from-sky-500 to-cyan-500',
+  },
+];
+
+export interface Experience {
+  title: string;
+  company: string;
+  type: string;
+  period: string;
+  location: string;
+  tasks: string[];
+  current?: boolean;
+}
+
