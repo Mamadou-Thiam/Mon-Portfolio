@@ -3,6 +3,7 @@ import { BarChart3, Cable, Laptop, Network, Presentation } from 'lucide-react';
 import abnCover from '../assets/abn.png';
 import cmasCover from '../assets/cmas.png';
 import jumellesCover from '../assets/jumelles.png';
+import lominaCover from '../assets/lomina.png';
 import ndiouroulCover from '../assets/ndiouroul.png';
 
 export interface NavLink {
@@ -36,7 +37,6 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/mamadou-thiam-309682255',
   github: 'https://github.com/Mamadou-Thiam',
   avatar: '/assets/momo.jpeg',
-  available: true,
 };
 
 export interface CvFile {
@@ -101,6 +101,7 @@ export const highlightedProjectTitles = [
   'CMAS — Cabinet Médical Ahmadina Saliou',
   'Ndiouroul Voyage',
   'Jumelles Amar',
+  'Lomina Group',
 ];
 
 export type ProjectCategory = 'Applications web' | 'Gestion métier' | 'Cloud & infrastructure';
@@ -221,6 +222,19 @@ export const projects: Project[] = [
     category: 'Applications web',
     url: 'https://www.ndiouroulvoyage.com/',
     image: ndiouroulCover,
+    highlight: true,
+  },
+  {
+    title: 'Lomina Group',
+    description:
+      "Site vitrine de Lomina Group (Lomina International Links) : relations internationales, grands projets d'infrastructure, marinas et développement urbain.",
+    problem:
+      'Présenter les activités et les projets du groupe avec une navigation claire et un accès direct au contact.',
+    tags: ['React.js', 'Web Design', 'SEO'],
+    category: 'Applications web',
+    context: 'Projet freelance',
+    url: 'https://lomina-group.com/',
+    image: lominaCover,
     highlight: true,
   },
   {

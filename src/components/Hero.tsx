@@ -7,20 +7,8 @@ function Hero() {
     <section id="home" className="relative flex min-h-screen items-center pt-28 pb-16 sm:pt-32 lg:pt-24">
       <div className="container grid items-center gap-14 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
         <div className="max-w-3xl">
-          <Reveal>
-            <span className="inline-flex items-center gap-2.5 text-xs font-medium text-slate-400">
-              <span
-                className={`inline-flex h-2 w-2 rounded-full ${
-                  profile.available ? 'bg-accent-indigo' : 'bg-slate-500'
-                }`}
-                aria-hidden="true"
-              />
-              Disponible pour de nouveaux projets
-            </span>
-          </Reveal>
-
           <Reveal delay={70}>
-            <h1 className="mt-7">
+            <h1 className="mt-12">
               <span className="block font-display text-[3.35rem] leading-[0.98] tracking-[-0.035em] text-white sm:text-7xl lg:text-[5.4rem]">
                 Mamadou <span className="italic">Thiam</span>
               </span>
@@ -35,8 +23,8 @@ function Hero() {
           <Reveal delay={140}>
             <p className="mt-7 max-w-2xl text-base leading-[1.8] text-slate-400 sm:text-lg">
               Je conçois des applications web MERN et je construis l’infrastructure qui les héberge.
-              Instructeur en développement web chez GoMyCode, étudiant en Master 2 Systèmes, Réseaux
-              &amp; Cloud à l’IAM, je mène également des projets freelance à Dakar.
+              Instructeur en développement web chez GoMyCode, titulaire d'un Master en Systèmes,
+              Réseaux &amp; Cloud à l’IAM, je mène également des projets freelance à Dakar.
             </p>
           </Reveal>
 

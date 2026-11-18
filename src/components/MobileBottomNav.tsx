@@ -36,7 +36,7 @@ function MobileBottomNav({ active, onNavigate }: MobileBottomNavProps) {
                 onClick={() => onNavigate(link.id)}
                 aria-label={link.label}
                 aria-current={isActive ? 'page' : undefined}
-                className={`relative flex h-14 w-full flex-col items-center justify-center gap-1.5 transition-colors duration-200 ${
+                className={`relative flex h-14 w-full flex-col items-center justify-center gap-1.5 transition-colors duration-300 active:scale-95 ${
                   isActive ? 'text-accent-indigo' : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -46,11 +46,17 @@ function MobileBottomNav({ active, onNavigate }: MobileBottomNavProps) {
                     isActive ? 'scale-x-100' : 'scale-x-0'
                   }`}
                 />
-                <Icon
-                  className="h-5 w-5"
-                  strokeWidth={isActive ? 2.2 : 1.8}
-                  aria-hidden="true"
-                />
+                <span
+                  className={`transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    isActive ? 'scale-110' : 'scale-100 group-hover:scale-105'
+                  }`}
+                >
+                  <Icon
+                    className="h-5 w-5"
+                    strokeWidth={isActive ? 2.2 : 1.8}
+                    aria-hidden="true"
+                  />
+                </span>
                 <span className="sr-only">{link.label}</span>
               </button>
             </li>

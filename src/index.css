@@ -39,6 +39,10 @@
     --rule: 224 221 214;
     --highlight-bg: 24 25 27;
     --highlight-text: 241 240 236;
+    /* Le bloc « Sélection mise en avant » reste sombre dans les deux thèmes :
+       ses textes ne doivent jamais dépendre des tokens de page (clairs en light). */
+    --highlight-muted: 188 187 182;
+    --highlight-accent: 224 160 127;
     --theme-color: #f7f6f2;
   }
 
@@ -76,6 +80,8 @@
     --rule: 50 51 54;
     --highlight-bg: 23 24 25;
     --highlight-text: 240 239 235;
+    --highlight-muted: 188 187 182;
+    --highlight-accent: 224 160 127;
     --theme-color: #101112;
   }
 

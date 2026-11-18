@@ -66,8 +66,20 @@ export default {
       backgroundImage: {
         'brand-gradient': 'linear-gradient(90deg, #9B5A3B 0%, #9B5A3B 100%)',
       },
-      keyframes: {},
-      animation: {},
+      keyframes: {
+        'nav-in': {
+          '0%': { opacity: '0', transform: 'translate3d(0, -8px, 0)' },
+          '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' },
+        },
+        'icon-in': {
+          '0%': { opacity: '0', transform: 'rotate(-45deg) scale(0.7)' },
+          '100%': { opacity: '1', transform: 'rotate(0) scale(1)' },
+        },
+      },
+      animation: {
+        'nav-in': 'nav-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'icon-in': 'icon-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both',
+      },
     },
   },
   plugins: [],

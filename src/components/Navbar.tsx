@@ -14,6 +14,8 @@ function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const firstLinkRef = useRef<HTMLButtonElement | null>(null);
   const toggleRef = useRef<HTMLButtonElement | null>(null);
+  const navListRef = useRef<HTMLUListElement | null>(null);
+  const [activeIndicator, setActiveIndicator] = useState<{ left: number; width: number } | null>(null);
 
   const goTo = (id: string) => {
     setOpen(false);
@@ -45,6 +47,22 @@ function Navbar() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  /* L'actif est mesuré sur le vrai bouton : l'indicateur glisse d'une rubrique à l'autre. */
+  useEffect(() => {
+    const list = navListRef.current;
+    if (!list) return;
+
+    const update = () => {
+      const current = list.querySelector<HTMLButtonElement>('[aria-current="page"]');
+      setActiveIndicator(current ? { left: current.offsetLeft, width: current.offsetWidth } : null);
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    document.fonts?.ready.then(update).catch(() => {});
+    return () => window.removeEventListener('resize', update);
+  }, [active]);
+
   return (
     <>
       <header
@@ -57,39 +75,70 @@ function Navbar() {
       <nav className="container flex h-[72px] items-center justify-between gap-4" aria-label="Navigation principale">
         <button
           onClick={() => goTo('home')}
-          className="group flex items-center gap-3 font-display text-xl tracking-[-0.02em] text-white"
+          className="group flex items-center font-display text-xl tracking-[-0.02em] text-white"
           aria-label="Mamadou THIAM — retour à l'accueil"
         >
-          <span className="h-2 w-2 rounded-full bg-accent-indigo transition-transform duration-300 group-hover:scale-125" />
           <span>
-            Mamadou <span className="italic">Thiam</span>
+            Mamadou{' '}
+            <span className="inline-block italic transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5">
+              Thiam
+            </span>
           </span>
         </button>
 
-        <ul className="hidden items-center gap-7 lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <button
-                type="button"
-                onClick={() => goTo(link.id)}
-                aria-current={active === link.id ? 'page' : undefined}
-                className={`text-sm transition-colors duration-200 ${
-                  active === link.id ? 'text-accent-indigo' : 'text-slate-400 hover:text-white'
-                }`}
+        <ul ref={navListRef} className="relative hidden items-center gap-7 lg:flex">
+          {navLinks.map((link, index) => {
+            const isActive = active === link.id;
+
+            return (
+              <li
+                key={link.id}
+                className="animate-nav-in"
+                style={{ animationDelay: `${120 + index * 55}ms` }}
               >
-                {link.label}
-              </button>
-            </li>
-          ))}
+                <button
+                  type="button"
+                  onClick={() => goTo(link.id)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`group relative inline-flex py-2 text-sm transition-colors duration-300 ease-out ${
+                    isActive ? 'text-accent-indigo' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <span className="transition-transform duration-300 ease-out group-hover:-translate-y-px">
+                    {link.label}
+                  </span>
+                  {!isActive && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-current opacity-0 transition-[transform,opacity] duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-40"
+                    />
+                  )}
+                </button>
+              </li>
+            );
+          })}
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute bottom-0 h-px bg-accent-indigo transition-[transform,width,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              activeIndicator ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              width: activeIndicator?.width ?? 0,
+              transform: `translateX(${activeIndicator?.left ?? 0}px)`,
+            }}
+          />
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={cvFiles[0].file}
             download={cvFiles[0].download}
-            className="hidden items-center gap-2 border border-[rgb(var(--rule))] px-4 py-2 text-xs font-medium text-white transition-colors hover:border-accent-indigo hover:text-accent-indigo sm:inline-flex"
+            className="group hidden items-center gap-2 border border-[rgb(var(--rule))] px-4 py-2 text-xs font-medium text-white transition-[color,border-color] duration-300 hover:border-accent-indigo hover:text-accent-indigo sm:inline-flex"
           >
-            <Download className="h-3.5 w-3.5" aria-hidden="true" />
+            <Download
+              className="h-3.5 w-3.5 transition-transform duration-300 ease-out group-hover:translate-y-0.5"
+              aria-hidden="true"
+            />
             CV
           </a>
 
@@ -101,7 +150,9 @@ function Navbar() {
             aria-pressed={theme === 'dark'}
             title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
           >
-            {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+            <span key={theme} className="inline-flex animate-icon-in">
+              {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+            </span>
           </button>
 
           <button
@@ -121,7 +172,7 @@ function Navbar() {
       {/* Menu mobile : panneau plein écran, sobre et hiérarchisé */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[72px] bottom-0 hidden overflow-y-auto border-t border-[rgb(var(--rule))] bg-base-950 transition-opacity duration-200 md:block lg:hidden ${
+        className={`fixed inset-x-0 top-[72px] bottom-0 hidden overflow-y-auto border-t border-[rgb(var(--rule))] bg-base-950 transition-opacity duration-300 md:block lg:hidden ${
           open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
         aria-hidden={!open}
@@ -135,10 +186,13 @@ function Navbar() {
                   type="button"
                   tabIndex={open ? 0 : -1}
                   onClick={() => goTo(link.id)}
-                  className="flex w-full items-baseline justify-between py-4 text-left"
+                  className={`flex w-full items-baseline justify-between py-4 text-left transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    open ? 'translate-x-0 opacity-100' : '-translate-x-3 opacity-0'
+                  }`}
+                  style={{ transitionDelay: open ? `${80 + index * 45}ms` : '0ms' }}
                 >
                   <span
-                    className={`font-display text-3xl tracking-[-0.02em] ${
+                    className={`font-display text-3xl tracking-[-0.02em] transition-colors duration-300 ${
                       active === link.id ? 'text-accent-indigo' : 'text-white'
                     }`}
                   >

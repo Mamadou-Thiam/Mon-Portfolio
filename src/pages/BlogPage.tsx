@@ -55,10 +55,9 @@ function BlogPage() {
         <nav className="container flex h-[72px] items-center justify-between gap-4" aria-label="Navigation du journal">
           <button
             onClick={goHome}
-            className="group flex items-center gap-3 font-display text-xl tracking-[-0.02em] text-white"
+            className="flex items-center font-display text-xl tracking-[-0.02em] text-white"
             aria-label="Mamadou THIAM — retour à l'accueil"
           >
-            <span className="h-2 w-2 rounded-full bg-accent-indigo transition-transform duration-300 group-hover:scale-125" />
             <span>
               Mamadou <span className="italic">Thiam</span>
             </span>
@@ -72,7 +71,9 @@ function BlogPage() {
               aria-pressed={theme === 'dark'}
               title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
             >
-              {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+              <span key={theme} className="inline-flex animate-icon-in">
+                {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+              </span>
             </button>
 
             <button onClick={goHome} className="btn-quiet hidden px-4 py-2 text-xs sm:inline-flex">
