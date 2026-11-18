@@ -9,7 +9,7 @@ npm install
 npm run dev        # serveur de développement
 npm run typecheck  # vérification TypeScript
 npm run lint       # ESLint
-npm run build      # build de production + PWA
+npm run build      # build de production
 npm run preview    # prévisualisation du build
 ```
 
