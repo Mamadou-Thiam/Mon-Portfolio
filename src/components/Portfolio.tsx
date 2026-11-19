@@ -35,7 +35,7 @@ function HighlightProject({ project, index }: { project: Project; index: number 
             src={project.image}
             alt={`Couverture du projet ${project.title}`}
             loading="lazy"
-            className="w-full border border-white/15 object-cover"
+            className="w-full border border-[rgb(var(--highlight-rule)_/_0.15)] object-cover"
           />
         )}
         <div className="mt-5 flex items-start justify-between gap-4">
@@ -107,7 +107,7 @@ function Portfolio() {
         {/* Sélection mise en avant : seuls ces projets ont une couverture. */}
         <Reveal>
           <div className="mt-14 bg-[rgb(var(--highlight-bg))] px-6 pb-10 pt-8 sm:px-10 sm:pb-14 sm:pt-10 lg:px-14">
-            <div className="flex items-baseline justify-between gap-4 border-b border-white/15 pb-4">
+            <div className="flex items-baseline justify-between gap-4 border-b border-[rgb(var(--highlight-rule)_/_0.15)] pb-4">
               <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-[rgb(var(--highlight-text))]">
                 Sélection mise en avant
               </h3>
