@@ -17,14 +17,15 @@ function readStoredTheme(): Theme | null {
   }
 }
 
-/** Interface lumineuse par défaut ; le mode sombre reste un choix explicite. */
-function getInitialTheme(): Theme {
-  return readStoredTheme() === 'dark' ? 'dark' : 'light';
+/** Sans choix explicite, on suit le réglage du système (notamment sur mobile). */
+function getSystemTheme(): Theme {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle('dark', theme === 'dark');
+  root.classList.toggle('light', theme === 'light');
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLORS[theme]);
 }
 
@@ -38,19 +39,37 @@ function animateThemeChange() {
 }
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>(() => readStoredTheme() ?? getSystemTheme());
+  const [explicitChoice, setExplicitChoice] = useState(() => readStoredTheme() !== null);
 
   useEffect(() => {
     applyTheme(theme);
+  }, [theme]);
+
+  /* On ne mémorise que le choix de l'utilisateur ; sinon le thème reste lié au système. */
+  useEffect(() => {
+    if (!explicitChoice) return;
     try {
       window.localStorage.setItem(STORAGE_KEY, theme);
     } catch {
       /* stockage indisponible */
     }
-  }, [theme]);
+  }, [theme, explicitChoice]);
+
+  useEffect(() => {
+    if (explicitChoice) return;
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = (event: MediaQueryListEvent) => {
+      animateThemeChange();
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
+  }, [explicitChoice]);
 
   const toggleTheme = useCallback(() => {
     animateThemeChange();
+    setExplicitChoice(true);
     setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
   }, []);
 

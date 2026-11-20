@@ -7,8 +7,12 @@
     <script>
       (function () {
         try {
-          var dark = localStorage.getItem('portfolio-theme') === 'dark';
+          var stored = localStorage.getItem('portfolio-theme');
+          var dark =
+            stored === 'dark' ||
+            (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
           document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.classList.toggle('light', !dark);
           document
             .querySelector('meta[name="theme-color"]')
             .setAttribute('content', dark ? '#101112' : '#f7f6f2');
